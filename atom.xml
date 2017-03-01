@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>塔塔拉夏的博客</title>
+  <subtitle>君子乾乾,夕惕若厉.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://z-caterpillar.github.io/"/>
+  <updated>2017-03-01T05:48:36.000Z</updated>
+  <id>http://z-caterpillar.github.io/</id>
+  
+  <author>
+    <name>塔塔拉夏</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>init2</title>
+    <link href="http://z-caterpillar.github.io/2017/03/01/init2/"/>
+    <id>http://z-caterpillar.github.io/2017/03/01/init2/</id>
+    <published>2017-03-01T05:48:36.000Z</published>
+    <updated>2017-03-01T05:48:36.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>init</title>
+    <link href="http://z-caterpillar.github.io/2017/03/01/init/"/>
+    <id>http://z-caterpillar.github.io/2017/03/01/init/</id>
+    <published>2017-03-01T05:47:49.000Z</published>
+    <updated>2017-03-01T05:47:49.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
