@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="docker,zookeeper,docker-compose,坑," />
+  <meta name="keywords" content="docker,zookeeper,docker-compose," />
 
 
 
@@ -89,17 +89,26 @@
 
 
 
-<meta name="description" content="过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,现在online版本也是单机模式(´°д°`)。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个zk-manager管理器,以后本地测试与验证终于可">
+<meta name="description" content="过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。
+
+原料
+Do">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用docker创建zookeeper集群">
 <meta property="og:url" content="http://z-caterpillar.github.io/2017/03/01/docker_zookeeper_cluster/index.html">
 <meta property="og:site_name" content="塔塔拉夏的博客">
-<meta property="og:description" content="过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,现在online版本也是单机模式(´°д°`)。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个zk-manager管理器,以后本地测试与验证终于可">
+<meta property="og:description" content="过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。
+
+原料
+Do">
 <meta property="og:image" content="http://z-caterpillar.github.io/2017/03/01/docker_zookeeper_cluster/node-zk-web.png">
-<meta property="og:updated_time" content="2017-03-01T15:07:20.000Z">
+<meta property="og:updated_time" content="2017-03-02T02:31:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用docker创建zookeeper集群">
-<meta name="twitter:description" content="过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,现在online版本也是单机模式(´°д°`)。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个zk-manager管理器,以后本地测试与验证终于可">
+<meta name="twitter:description" content="过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。
+
+原料
+Do">
 <meta name="twitter:image" content="http://z-caterpillar.github.io/2017/03/01/docker_zookeeper_cluster/node-zk-web.png">
 
 
@@ -362,6 +371,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -398,7 +429,7 @@
 
       
         <blockquote>
-<p>过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,<em>现在online版本也是单机模式(´°д°`)</em>。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个zk-manager管理器,以后本地测试与验证终于可以在集群环境下进行了。</p>
+<p>过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。</p>
 </blockquote>
 <h2 id="原料"><a href="#原料" class="headerlink" title="原料"></a>原料</h2><ul>
 <li>Docker version 1.13.0</li>
@@ -411,8 +442,18 @@
 <h3 id="运行启动服务"><a href="#运行启动服务" class="headerlink" title="运行启动服务"></a>运行启动服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">➜  zk-docker docker-compose up --remove <span class="_">-d</span></div><div class="line">Starting zoo3</div><div class="line">Starting zoo2</div><div class="line">Starting zoo1</div><div class="line">Starting zk-manager</div><div class="line">➜  zk-docker docker-compose ps</div><div class="line">   Name                 Command               State                      Ports</div><div class="line">-------------------------------------------------------------------------------------------------</div><div class="line">zk-manager   /opt/node-zk-browser/start.sh    Up      0.0.0.0:3000-&gt;3000/tcp</div><div class="line">zoo1         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21811-&gt;2181/tcp, 2888/tcp, 3888/tcp</div><div class="line">zoo2         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21812-&gt;2181/tcp, 2888/tcp, 3888/tcp</div><div class="line">zoo3         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21813-&gt;2181/tcp, 2888/tcp, 3888/tcp</div></pre></td></tr></table></figure>
 <h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><p>通过zkCli访问:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">➜  zk-docker zkCli -server 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</div><div class="line">Connecting to 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</div><div class="line">Welcome to ZooKeeper!</div><div class="line">JLine support is enabled</div><div class="line"></div><div class="line">WATCHER::</div><div class="line"></div><div class="line">WatchedEvent state:SyncConnected <span class="built_in">type</span>:None path:null</div><div class="line">[zk: 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813(CONNECTED) 0]</div></pre></td></tr></table></figure>
-<p>node-zk-browser web界面 地址：<a href="http://127.0.0.1:3000" target="_blank" rel="external">http://127.0.0.1:3000</a> </p>
+<p>node-zk-browser web界面 地址：<a href="http://127.0.0.1:3000" target="_blank" rel="external">http://127.0.0.1:3000</a></p>
 <p><img src="/2017/03/01/docker_zookeeper_cluster/node-zk-web.png" alt="noke-zk-browser"></p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
+<li>集群包含三个zookeeper节点:zoo1,zoo2,zoo3,分别本地21811,21812,21813三个端口,docker端口为2181</li>
+<li>各个zookeeper节点数据存储在本地./storge/zoo1,zoo2,zoo3。</li>
+<li>zookeeper节点通过docker端口2888,3888进行通讯,2888为选举端口,3888为备选端口</li>
+<li>node-zk-browser通过docker端口2181访问各个zookeeper节点,本地监听3000端口</li>
+</ul>
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><ul>
+<li>node-zk-browser界面丑出天际有没有(ノ ﾟДﾟ)ノ　＝＝＝＝　┻━━┻?谁有更好的选择推荐一下。</li>
+<li>目前无法使用docker-compose scale动态扩展zookeeper节点,因为ZOO_MY_ID和ZOO_SERVERS选项需要在配置文件中制定,但这一方面并不是很重要,一般情况下并不需要扩展节点。</li>
+</ul>
 
       
     </div>
@@ -457,8 +498,6 @@
             <a href="/tags/zookeeper/" rel="tag"># zookeeper</a>
           
             <a href="/tags/docker-compose/" rel="tag"># docker-compose</a>
-          
-            <a href="/tags/坑/" rel="tag"># 坑</a>
           
         </div>
       
@@ -569,11 +608,18 @@
           
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -626,7 +672,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原料"><span class="nav-number">1.</span> <span class="nav-text">原料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备目录"><span class="nav-number">2.1.</span> <span class="nav-text">准备目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑docker-compose-yml配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">编辑docker-compose.yml配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行启动服务"><span class="nav-number">2.3.</span> <span class="nav-text">运行启动服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方式"><span class="nav-number">2.4.</span> <span class="nav-text">使用方式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原料"><span class="nav-number">1.</span> <span class="nav-text">原料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备目录"><span class="nav-number">2.1.</span> <span class="nav-text">准备目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑docker-compose-yml配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">编辑docker-compose.yml配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行启动服务"><span class="nav-number">2.3.</span> <span class="nav-text">运行启动服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方式"><span class="nav-number">2.4.</span> <span class="nav-text">使用方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遗留问题"><span class="nav-number">4.</span> <span class="nav-text">遗留问题</span></a></li></ol></div>
             
 
           </div>
