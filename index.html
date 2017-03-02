@@ -440,7 +440,7 @@
 <p>node-zk-browser web界面 地址：<a href="http://127.0.0.1:3000" target="_blank" rel="external">http://127.0.0.1:3000</a></p>
 <p><img src="/2017/03/01/docker_zookeeper_cluster/node-zk-web.png" alt="noke-zk-browser"></p>
 <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
-<li>集群包含三个zookeeper节点:zoo1,zoo2,zoo3,分别本地21811,21812,21813三个端口,docker端口为2181</li>
+<li>集群包含三个zookeeper节点:zoo1,zoo2,zoo3,分别监听本地21811,21812,21813三个端口,docker端口为2181</li>
 <li>各个zookeeper节点数据存储在本地./storge/zoo1,zoo2,zoo3。</li>
 <li>zookeeper节点通过docker端口2888,3888进行通讯,2888为选举端口,3888为备选端口</li>
 <li>node-zk-browser通过docker端口2181访问各个zookeeper节点,本地监听3000端口</li>
