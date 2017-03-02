@@ -102,7 +102,7 @@ Do">
 原料
 Do">
 <meta property="og:image" content="http://z-caterpillar.github.io/2017/03/01/docker_zookeeper_cluster/node-zk-web.png">
-<meta property="og:updated_time" content="2017-03-02T03:41:37.000Z">
+<meta property="og:updated_time" content="2017-03-02T03:43:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用docker创建zookeeper集群">
 <meta name="twitter:description" content="过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。
@@ -451,7 +451,7 @@ Do">
 <li>node-zk-browser通过docker端口2181访问各个zookeeper节点,本地监听3000端口</li>
 </ul>
 <h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><ul>
-<li>node-zk-browser界面丑出天际有没有(ノ ﾟДﾟ)ノ　＝＝＝＝　┻━━┻?谁有更好的选择推荐一下。</li>
+<li>node-zk-browser界面丑出天际有没有(ノ ﾟДﾟ)ノ　＝＝＝＝　┻━━┻?<br>谁有更好的选择推荐一下。</li>
 <li>目前无法使用docker-compose scale动态扩展zookeeper节点,因为ZOO_MY_ID和ZOO_SERVERS选项需要在配置文件中制定,但这一方面并不是很重要,一般情况下并不需要扩展节点。</li>
 </ul>
 
