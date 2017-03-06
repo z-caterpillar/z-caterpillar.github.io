@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="docker,zookeeper,docker-compose," />
+  <meta name="keywords" content="kafka,分布式,scala," />
 
 
 
@@ -89,27 +89,22 @@
 
 
 
-<meta name="description" content="过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。
+<meta name="description" content="本文以kafka cluster为例讲解客户端如何连接到分布式系统。
 
-原料
-Do">
+客户端连接分布式系统的方式和传统的方式不同,一般不会直接连接端口,而是通过连接到zookeeper,再从zookeeper中获取连接地址,下面我们以kafka cluster为例讲解一下">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用docker创建zookeeper集群">
-<meta property="og:url" content="http://z-caterpillar.github.io/2017/03/01/docker_zookeeper_cluster/index.html">
+<meta property="og:title" content="客户端与分布式系统连接(以kafka集群为例)">
+<meta property="og:url" content="http://z-caterpillar.github.io/2017/03/03/connect-to-kafka/index.html">
 <meta property="og:site_name" content="塔塔拉夏的博客">
-<meta property="og:description" content="过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。
+<meta property="og:description" content="本文以kafka cluster为例讲解客户端如何连接到分布式系统。
 
-原料
-Do">
-<meta property="og:image" content="http://z-caterpillar.github.io/2017/03/01/docker_zookeeper_cluster/node-zk-web.png">
-<meta property="og:updated_time" content="2017-03-02T03:43:24.000Z">
+客户端连接分布式系统的方式和传统的方式不同,一般不会直接连接端口,而是通过连接到zookeeper,再从zookeeper中获取连接地址,下面我们以kafka cluster为例讲解一下">
+<meta property="og:updated_time" content="2017-03-03T09:40:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用docker创建zookeeper集群">
-<meta name="twitter:description" content="过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。
+<meta name="twitter:title" content="客户端与分布式系统连接(以kafka集群为例)">
+<meta name="twitter:description" content="本文以kafka cluster为例讲解客户端如何连接到分布式系统。
 
-原料
-Do">
-<meta name="twitter:image" content="http://z-caterpillar.github.io/2017/03/01/docker_zookeeper_cluster/node-zk-web.png">
+客户端连接分布式系统的方式和传统的方式不同,一般不会直接连接端口,而是通过连接到zookeeper,再从zookeeper中获取连接地址,下面我们以kafka cluster为例讲解一下">
 
 
 
@@ -137,13 +132,13 @@ Do">
 
 
 
-  <link rel="canonical" href="http://z-caterpillar.github.io/2017/03/01/docker_zookeeper_cluster/"/>
+  <link rel="canonical" href="http://z-caterpillar.github.io/2017/03/03/connect-to-kafka/"/>
 
 
 
 
 
-  <title> 使用docker创建zookeeper集群 | 塔塔拉夏的博客 </title>
+  <title> 客户端与分布式系统连接(以kafka集群为例) | 塔塔拉夏的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -324,7 +319,7 @@ Do">
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://z-caterpillar.github.io/2017/03/01/docker_zookeeper_cluster/">
+    <link itemprop="mainEntityOfPage" href="http://z-caterpillar.github.io/2017/03/03/connect-to-kafka/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="塔塔拉夏">
@@ -345,7 +340,7 @@ Do">
             
             
               
-                使用docker创建zookeeper集群
+                客户端与分布式系统连接(以kafka集群为例)
               
             
           </h1>
@@ -360,8 +355,8 @@ Do">
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T15:01:00+08:00">
-                2017-03-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-03T16:51:12+08:00">
+                2017-03-03
               </time>
             
 
@@ -401,8 +396,8 @@ Do">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/01/docker_zookeeper_cluster/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/01/docker_zookeeper_cluster/" itemprop="commentCount"></span>
+                <a href="/2017/03/03/connect-to-kafka/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/03/connect-to-kafka/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -428,32 +423,48 @@ Do">
       
 
       
-        <blockquote>
-<p>过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。</p>
+        <p>本文以kafka cluster为例讲解客户端如何连接到分布式系统。</p>
+<blockquote>
+<p>客户端连接分布式系统的方式和传统的方式不同,一般不会直接连接端口,而是通过连接到zookeeper,再从zookeeper中获取连接地址,下面我们以kafka cluster为例讲解一下<br><a id="more"></a></p>
 </blockquote>
 <h2 id="原料"><a href="#原料" class="headerlink" title="原料"></a>原料</h2><ul>
-<li>Docker version 1.13.0</li>
-<li>docker-compose version 1.10.0</li>
-<li>fify/node-zk-browser:latest 镜像</li>
-<li>zookeeper:latest 镜像</li>
+<li>zookeeper 集群  搭建方式见 &lt;<a href="/2017/03/01/docker-zookeeper-cluster" title="使用docker创建zookeeper集群">使用docker创建zookeeper集群</a>&gt;</li>
+<li>kafka 集群 搭建方式见 &lt;<a href="/2017/03/02/docker-kafka-cluster" title="使用docker创建kafka集群">使用docker创建kafka集群</a>&gt;</li>
+<li>scala 我恨java,能不用绝对不用(￣‐￣)んー</li>
 </ul>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="准备目录"><a href="#准备目录" class="headerlink" title="准备目录"></a>准备目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">➜  ~ mkdir zk-docker &amp;&amp; touch zk-docker/docker-compose.yml</div><div class="line">➜  ~ ls zk-docker/docker-compose.yml</div><div class="line">zk-docker/docker-compose.yml</div><div class="line">➜  ~</div></pre></td></tr></table></figure>
-<h3 id="编辑docker-compose-yml配置文件"><a href="#编辑docker-compose-yml配置文件" class="headerlink" title="编辑docker-compose.yml配置文件"></a>编辑docker-compose.yml配置文件</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="attr">version:</span> <span class="string">'2'</span></div><div class="line"><span class="attr">networks:</span></div><div class="line"><span class="attr">  zookeeper_network:</span></div><div class="line"><span class="attr">      driver:</span> bridge</div><div class="line"><span class="attr">services:</span></div><div class="line"><span class="attr">  zoo1:</span></div><div class="line"><span class="attr">    image:</span> zookeeper:latest</div><div class="line"><span class="attr">    container_name:</span> zoo1</div><div class="line"><span class="attr">    ports:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"21811:2181"</span></div><div class="line"><span class="attr">    expose:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"2888"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"3888"</span></div><div class="line"><span class="attr">    networks:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></div><div class="line"><span class="attr">    volumes:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo1/data:/data:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo1/datalog:/datalog:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo1/conf:/conf:rw"</span></div><div class="line"><span class="attr">    environment:</span></div><div class="line"><span class="attr">      ZOO_MY_ID:</span> <span class="number">1</span></div><div class="line"><span class="attr">      ZOO_SERVERS:</span> server<span class="number">.1</span>=zoo1:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.2</span>=zoo2:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.3</span>=zoo3:<span class="number">2888</span>:<span class="number">3888</span></div><div class="line"><span class="attr">  zoo2:</span></div><div class="line"><span class="attr">    image:</span> zookeeper:latest</div><div class="line"><span class="attr">    container_name:</span> zoo2</div><div class="line"><span class="attr">    ports:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"21812:2181"</span></div><div class="line"><span class="attr">    networks:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></div><div class="line"><span class="attr">    expose:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"2888"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"3888"</span></div><div class="line"><span class="attr">    volumes:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo2/data:/data:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo2/datalog:/datalog:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo2/conf:/conf:rw"</span></div><div class="line"><span class="attr">    environment:</span></div><div class="line"><span class="attr">      ZOO_MY_ID:</span> <span class="number">2</span></div><div class="line"><span class="attr">      ZOO_SERVERS:</span> server<span class="number">.1</span>=zoo1:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.2</span>=zoo2:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.3</span>=zoo3:<span class="number">2888</span>:<span class="number">3888</span></div><div class="line"><span class="attr">  zoo3:</span></div><div class="line"><span class="attr">    image:</span> zookeeper:latest</div><div class="line"><span class="attr">    container_name:</span> zoo3</div><div class="line"><span class="attr">    ports:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"21813:2181"</span></div><div class="line"><span class="attr">    networks:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></div><div class="line"><span class="attr">    expose:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"2888"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"3888"</span></div><div class="line"><span class="attr">    volumes:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo3/data:/data:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo3/datalog:/datalog:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo3/conf:/conf:rw"</span></div><div class="line"><span class="attr">    environment:</span></div><div class="line"><span class="attr">      ZOO_MY_ID:</span> <span class="number">3</span></div><div class="line"><span class="attr">      ZOO_SERVERS:</span> server<span class="number">.1</span>=zoo1:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.2</span>=zoo2:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.3</span>=zoo3:<span class="number">2888</span>:<span class="number">3888</span></div><div class="line"><span class="attr">  zk-manager:</span></div><div class="line"><span class="attr">    image:</span> fify/node-zk-browser:latest</div><div class="line"><span class="attr">    container_name:</span> zk-manager</div><div class="line"><span class="attr">    restart:</span> always</div><div class="line"><span class="attr">    depends_on:</span></div><div class="line"><span class="bullet">      -</span> zoo1</div><div class="line"><span class="bullet">      -</span> zoo2</div><div class="line"><span class="bullet">      -</span> zoo3</div><div class="line"><span class="attr">    ports:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"3000:3000"</span></div><div class="line"><span class="attr">    networks:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></div><div class="line"><span class="attr">    expose:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"3000"</span></div><div class="line"><span class="attr">    environment:</span></div><div class="line"><span class="attr">      ZK_HOST:</span> zoo1:<span class="number">2181</span>,zoo2:<span class="number">2181</span>,zoo3:<span class="number">2181</span></div></pre></td></tr></table></figure>
-<h3 id="运行启动服务"><a href="#运行启动服务" class="headerlink" title="运行启动服务"></a>运行启动服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">➜  zk-docker docker-compose up --remove <span class="_">-d</span></div><div class="line">Starting zoo3</div><div class="line">Starting zoo2</div><div class="line">Starting zoo1</div><div class="line">Starting zk-manager</div><div class="line">➜  zk-docker docker-compose ps</div><div class="line">   Name                 Command               State                      Ports</div><div class="line">-------------------------------------------------------------------------------------------------</div><div class="line">zk-manager   /opt/node-zk-browser/start.sh    Up      0.0.0.0:3000-&gt;3000/tcp</div><div class="line">zoo1         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21811-&gt;2181/tcp, 2888/tcp, 3888/tcp</div><div class="line">zoo2         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21812-&gt;2181/tcp, 2888/tcp, 3888/tcp</div><div class="line">zoo3         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21813-&gt;2181/tcp, 2888/tcp, 3888/tcp</div></pre></td></tr></table></figure>
-<h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><p>通过zkCli访问:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">➜  zk-docker zkCli -server 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</div><div class="line">Connecting to 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</div><div class="line">Welcome to ZooKeeper!</div><div class="line">JLine support is enabled</div><div class="line"></div><div class="line">WATCHER::</div><div class="line"></div><div class="line">WatchedEvent state:SyncConnected <span class="built_in">type</span>:None path:null</div><div class="line">[zk: 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813(CONNECTED) 0]</div></pre></td></tr></table></figure>
-<p>node-zk-browser web界面 地址：<a href="http://127.0.0.1:3000" target="_blank" rel="external">http://127.0.0.1:3000</a></p>
-<p><img src="/2017/03/01/docker_zookeeper_cluster/node-zk-web.png" alt="noke-zk-browser"></p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
-<li>集群包含三个zookeeper节点:zoo1,zoo2,zoo3,分别监听本地21811,21812,21813三个端口,docker端口为2181</li>
-<li>各个zookeeper节点数据存储在本地./storge/zoo1,zoo2,zoo3。</li>
-<li>zookeeper节点通过docker端口2888,3888进行通讯,2888为选举端口,3888为备选端口</li>
-<li>node-zk-browser通过docker端口2181访问各个zookeeper节点,本地监听3000端口</li>
-</ul>
-<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><ul>
-<li>node-zk-browser界面丑出天际有没有(ノ ﾟДﾟ)ノ　＝＝＝＝　┻━━┻?<br>谁有更好的选择推荐一下。</li>
-<li>目前无法使用docker-compose scale动态扩展zookeeper节点,因为ZOO_MY_ID和ZOO_SERVERS选项需要在配置文件中制定,但这一方面并不是很重要,一般情况下并不需要扩展节点。</li>
-</ul>
+<p>##kafka节点信息在zookeeper中的存储结构</p>
+<p>zookeeper中的每个节点(broker)的信息存在zookeeper中,可以通过命令行查看<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">➜  docker zkCli -server 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</div><div class="line">Connecting to 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</div><div class="line">Welcome to ZooKeeper!</div><div class="line">JLine support is enabled</div><div class="line"></div><div class="line">WATCHER::</div><div class="line"></div><div class="line">WatchedEvent state:SyncConnected <span class="built_in">type</span>:None path:null</div><div class="line">[zk: 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813(CONNECTED) 0] ls /brokers/ids</div><div class="line">[1015, 1014, 1013]</div><div class="line">[zk: 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813(CONNECTED) 1] get /brokers/ids/1015</div><div class="line">&#123;<span class="string">"jmx_port"</span>:-1,<span class="string">"timestamp"</span>:<span class="string">"1488523027648"</span>,<span class="string">"endpoints"</span>:[<span class="string">"PLAINTEXT://53a4d26884e0:9092"</span>],<span class="string">"host"</span>:<span class="string">"53a4d26884e0"</span>,<span class="string">"version"</span>:3,<span class="string">"port"</span>:9092&#125;</div><div class="line">cZxid = 0x90000035a</div><div class="line">ctime = Fri Mar 03 14:37:07 CST 2017</div><div class="line">mZxid = 0x90000035a</div><div class="line">mtime = Fri Mar 03 14:37:07 CST 2017</div><div class="line">pZxid = 0x90000035a</div><div class="line">cversion = 0</div><div class="line">dataVersion = 0</div><div class="line">aclVersion = 0</div><div class="line">ephemeralOwner = 0x15a8ddd034f0025</div><div class="line">dataLength = 135</div><div class="line">numChildren = 0</div><div class="line">[zk: 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813(CONNECTED) 2] get /brokers/ids/1014</div><div class="line">&#123;<span class="string">"jmx_port"</span>:-1,<span class="string">"timestamp"</span>:<span class="string">"1488523027875"</span>,<span class="string">"endpoints"</span>:[<span class="string">"PLAINTEXT://6a1c02a03222:9092"</span>],<span class="string">"host"</span>:<span class="string">"6a1c02a03222"</span>,<span class="string">"version"</span>:3,<span class="string">"port"</span>:9092&#125;</div><div class="line">cZxid = 0x900000361</div><div class="line">ctime = Fri Mar 03 14:37:07 CST 2017</div><div class="line">mZxid = 0x900000361</div><div class="line">mtime = Fri Mar 03 14:37:07 CST 2017</div><div class="line">pZxid = 0x900000361</div><div class="line">cversion = 0</div><div class="line">dataVersion = 0</div><div class="line">aclVersion = 0</div><div class="line">ephemeralOwner = 0x15a8ddd034f0024</div><div class="line">dataLength = 135</div><div class="line">numChildren = 0</div><div class="line">[zk: 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813(CONNECTED) 3] get /brokers/ids/1013</div><div class="line">&#123;<span class="string">"jmx_port"</span>:-1,<span class="string">"timestamp"</span>:<span class="string">"1488523027981"</span>,<span class="string">"endpoints"</span>:[<span class="string">"PLAINTEXT://bc7648a682f2:9092"</span>],<span class="string">"host"</span>:<span class="string">"bc7648a682f2"</span>,<span class="string">"version"</span>:3,<span class="string">"port"</span>:9092&#125;</div><div class="line">cZxid = 0x900000366</div><div class="line">ctime = Fri Mar 03 14:37:07 CST 2017</div><div class="line">mZxid = 0x900000366</div><div class="line">mtime = Fri Mar 03 14:37:07 CST 2017</div><div class="line">pZxid = 0x900000366</div><div class="line">cversion = 0</div><div class="line">dataVersion = 0</div><div class="line">aclVersion = 0</div><div class="line">ephemeralOwner = 0x25a8ddd0343001c</div><div class="line">dataLength = 135</div><div class="line">numChildren = 0</div></pre></td></tr></table></figure></p>
+<p>解释下节点信息<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;<span class="attr">"jmx_port"</span>:<span class="number">-1</span>,<span class="attr">"timestamp"</span>:<span class="string">"1488523027648"</span>,<span class="attr">"endpoints"</span>:[<span class="string">"PLAINTEXT://53a4d26884e0:9092"</span>],<span class="attr">"host"</span>:<span class="string">"53a4d26884e0"</span>,<span class="attr">"version"</span>:<span class="number">3</span>,<span class="attr">"port"</span>:<span class="number">9092</span>&#125;</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>jmx_port</td>
+<td></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td></td>
+</tr>
+<tr>
+<td>endpoints</td>
+<td></td>
+</tr>
+<tr>
+<td>host</td>
+<td></td>
+</tr>
+<tr>
+<td>port</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -493,11 +504,11 @@ Do">
       
         <div class="post-tags">
           
-            <a href="/tags/docker/" rel="tag"># docker</a>
+            <a href="/tags/kafka/" rel="tag"># kafka</a>
           
-            <a href="/tags/zookeeper/" rel="tag"># zookeeper</a>
+            <a href="/tags/分布式/" rel="tag"># 分布式</a>
           
-            <a href="/tags/docker-compose/" rel="tag"># docker-compose</a>
+            <a href="/tags/scala/" rel="tag"># scala</a>
           
         </div>
       
@@ -506,6 +517,22 @@ Do">
         
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/02/docker-kafka-cluster/" rel="next" title="使用docker创建kafka集群">
+                <i class="fa fa-chevron-left"></i> 使用docker创建kafka集群
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
@@ -551,8 +578,8 @@ Do">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/01/docker_zookeeper_cluster/"
-           data-title="使用docker创建zookeeper集群" data-url="http://z-caterpillar.github.io/2017/03/01/docker_zookeeper_cluster/">
+      <div class="ds-thread" data-thread-key="2017/03/03/connect-to-kafka/"
+           data-title="客户端与分布式系统连接(以kafka集群为例)" data-url="http://z-caterpillar.github.io/2017/03/03/connect-to-kafka/">
       </div>
     
   </div>
@@ -593,7 +620,7 @@ Do">
                alt="塔塔拉夏" />
           <p class="site-author-name" itemprop="name">塔塔拉夏</p>
            
-              <p class="site-description motion-element" itemprop="description">工程师,喜欢音乐,离不开咖啡,有个可爱的儿子。</p>
+              <p class="site-description motion-element" itemprop="description">工程师,喜欢音乐,离不开咖啡,有一个幸福的家庭,严父慈母小娇妻还有一个可爱的儿子。</p>
           
         </div>
         <nav class="site-state motion-element">
@@ -601,7 +628,7 @@ Do">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -619,7 +646,7 @@ Do">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -681,7 +708,7 @@ Do">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原料"><span class="nav-number">1.</span> <span class="nav-text">原料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备目录"><span class="nav-number">2.1.</span> <span class="nav-text">准备目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑docker-compose-yml配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">编辑docker-compose.yml配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行启动服务"><span class="nav-number">2.3.</span> <span class="nav-text">运行启动服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方式"><span class="nav-number">2.4.</span> <span class="nav-text">使用方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遗留问题"><span class="nav-number">4.</span> <span class="nav-text">遗留问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原料"><span class="nav-number">1.</span> <span class="nav-text">原料</span></a></li></ol></div>
             
 
           </div>
