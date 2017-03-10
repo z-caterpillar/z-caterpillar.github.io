@@ -99,7 +99,7 @@
 <meta property="og:description" content="使用sping-boot用最简单的方式发布一个包含http接口的docker服务。
 
 目前项目上本地和测试环境中全部的中间件与server都是部署在docker环境,调试过程中需要将client端代码发布到docker container中运行,spring依赖注入的特性可以简化开发,但是xml配置非常繁琐,spring boot很好的解决了这个问题,下面我们用spring boot做一个简单的d">
-<meta property="og:updated_time" content="2017-03-10T07:36:30.000Z">
+<meta property="og:updated_time" content="2017-03-10T07:40:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring-boot微框架创建java docker应用">
 <meta name="twitter:description" content="使用sping-boot用最简单的方式发布一个包含http接口的docker服务。
@@ -444,7 +444,7 @@
 <p>这就简单了,我们只需要在容器启动时将<code>./target/http-demo-0.0.1-SNAPSHOT.jar</code>挂载到容器文件<code>/app/app.jar</code>即可<br>运行命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --rm -v <span class="string">"<span class="variable">$PWD</span>/target/http-demo-0.0.1-SNAPSHOT.jar:/app/app.jar"</span> -p <span class="string">"10086:9527"</span> bankmonitor/spring-boot</div></pre></td></tr></table></figure></p>
 <p>我们把容器9527端口映射到本地10086端口（´➰｀)</p>
 <p>查看结果:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl http://127.0.0.1:10086/hi</div><div class="line">helloWorld:10086%</div></pre></td></tr></table></figure></p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>spring-boot非常适合作为docker java微框架相当好用,简化了大分布的配置操作,再今后如有使用到新的特性与依赖,会再做分享。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>spring-boot非常适合作为微框架,简化了大分布的配置操作,再今后如有使用到新的特性与依赖,会再做分享。</p>
 
       
     </div>
