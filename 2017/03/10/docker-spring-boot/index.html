@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="docker,docker-compose,zookeeper," />
+  <meta name="keywords" content="docker,spring-boot,java," />
 
 
 
@@ -89,24 +89,22 @@
 
 
 
-<meta name="description" content="使用docker创建一个包含三个节点的zookeeper集群,并提供web管理界面。
+<meta name="description" content="使用sping-boot用最简单的方式发布一个包含http接口的docker服务。
 
-过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-z">
+目前项目上本地和测试环境中全部的中间件与server都是部署在docker环境,调试过程中需要将client端代码发布到docker container中运行,spring依赖注入的特性可以简化开发,但是xml配置非常繁琐,spring boot很好的解决了这个问题,下面我们用spring boot做一个简单的d">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用docker创建zookeeper集群">
-<meta property="og:url" content="http://z-caterpillar.github.io/2017/03/01/docker-zookeeper-cluster/index.html">
+<meta property="og:title" content="spring-boot微框架创建java docker应用">
+<meta property="og:url" content="http://z-caterpillar.github.io/2017/03/10/docker-spring-boot/index.html">
 <meta property="og:site_name" content="塔塔拉夏的博客">
-<meta property="og:description" content="使用docker创建一个包含三个节点的zookeeper集群,并提供web管理界面。
+<meta property="og:description" content="使用sping-boot用最简单的方式发布一个包含http接口的docker服务。
 
-过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-z">
-<meta property="og:image" content="http://z-caterpillar.github.io/2017/03/01/docker-zookeeper-cluster/node-zk-web.png">
-<meta property="og:updated_time" content="2017-03-03T09:16:17.000Z">
+目前项目上本地和测试环境中全部的中间件与server都是部署在docker环境,调试过程中需要将client端代码发布到docker container中运行,spring依赖注入的特性可以简化开发,但是xml配置非常繁琐,spring boot很好的解决了这个问题,下面我们用spring boot做一个简单的d">
+<meta property="og:updated_time" content="2017-03-10T07:27:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用docker创建zookeeper集群">
-<meta name="twitter:description" content="使用docker创建一个包含三个节点的zookeeper集群,并提供web管理界面。
+<meta name="twitter:title" content="spring-boot微框架创建java docker应用">
+<meta name="twitter:description" content="使用sping-boot用最简单的方式发布一个包含http接口的docker服务。
 
-过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-z">
-<meta name="twitter:image" content="http://z-caterpillar.github.io/2017/03/01/docker-zookeeper-cluster/node-zk-web.png">
+目前项目上本地和测试环境中全部的中间件与server都是部署在docker环境,调试过程中需要将client端代码发布到docker container中运行,spring依赖注入的特性可以简化开发,但是xml配置非常繁琐,spring boot很好的解决了这个问题,下面我们用spring boot做一个简单的d">
 
 
 
@@ -134,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://z-caterpillar.github.io/2017/03/01/docker-zookeeper-cluster/"/>
+  <link rel="canonical" href="http://z-caterpillar.github.io/2017/03/10/docker-spring-boot/"/>
 
 
 
 
 
-  <title> 使用docker创建zookeeper集群 | 塔塔拉夏的博客 </title>
+  <title> spring-boot微框架创建java docker应用 | 塔塔拉夏的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -321,7 +319,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://z-caterpillar.github.io/2017/03/01/docker-zookeeper-cluster/">
+    <link itemprop="mainEntityOfPage" href="http://z-caterpillar.github.io/2017/03/10/docker-spring-boot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="塔塔拉夏">
@@ -342,7 +340,7 @@
             
             
               
-                使用docker创建zookeeper集群
+                spring-boot微框架创建java docker应用
               
             
           </h1>
@@ -357,8 +355,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-01T15:01:00+08:00">
-                2017-03-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T12:04:28+08:00">
+                2017-03-10
               </time>
             
 
@@ -398,8 +396,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/01/docker-zookeeper-cluster/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/01/docker-zookeeper-cluster/" itemprop="commentCount"></span>
+                <a href="/2017/03/10/docker-spring-boot/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/10/docker-spring-boot/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -425,33 +423,29 @@
       
 
       
-        <p>使用docker创建一个包含三个节点的zookeeper集群,并提供web管理界面。</p>
+        <p>使用sping-boot用最简单的方式发布一个包含http接口的docker服务。</p>
 <blockquote>
-<p>过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。</p>
-</blockquote>
-<a id="more"></a>
+<p>目前项目上本地和测试环境中全部的中间件与server都是部署在docker环境,调试过程中需要将client端代码发布到docker container中运行,spring依赖注入的特性可以简化开发,但是xml配置非常繁琐,spring boot很好的解决了这个问题,下面我们用spring boot做一个简单的docker应用。<br><a id="more"></a></p>
 <h2 id="原料"><a href="#原料" class="headerlink" title="原料"></a>原料</h2><ul>
 <li>Docker version 1.13.0</li>
-<li>docker-compose version 1.10.0</li>
-<li>fify/node-zk-browser:latest 镜像</li>
-<li>zookeeper:latest 镜像</li>
+<li>bankmonitor/spring-boot 镜像</li>
+<li>spring boot v1.5.2.RELEASE<h2 id="使用spring-boot微框架初始化项目"><a href="#使用spring-boot微框架初始化项目" class="headerlink" title="使用spring boot微框架初始化项目"></a>使用spring boot微框架初始化项目</h2>初始化项目:<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">spring init http-demo</div><div class="line">Using service at https://start.spring.io</div><div class="line">Project extracted to <span class="string">'/Users/zhaoliang/project/http-demo'</span></div></pre></td></tr></table></figure>
+</li>
 </ul>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="编辑zookeeper-yml配置文件"><a href="#编辑zookeeper-yml配置文件" class="headerlink" title="编辑zookeeper.yml配置文件"></a>编辑zookeeper.yml配置文件</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="attr">version:</span> <span class="string">'2'</span></div><div class="line"><span class="attr">networks:</span></div><div class="line"><span class="attr">  zookeeper_network:</span></div><div class="line"><span class="attr">      driver:</span> bridge</div><div class="line"><span class="attr">services:</span></div><div class="line"><span class="attr">  zoo1:</span></div><div class="line"><span class="attr">    image:</span> zookeeper:latest</div><div class="line"><span class="attr">    container_name:</span> zoo1</div><div class="line"><span class="attr">    ports:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"21811:2181"</span></div><div class="line"><span class="attr">    expose:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"2888"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"3888"</span></div><div class="line"><span class="attr">    networks:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></div><div class="line"><span class="attr">    volumes:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo1/data:/data:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo1/datalog:/datalog:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo1/conf:/conf:rw"</span></div><div class="line"><span class="attr">    environment:</span></div><div class="line"><span class="attr">      ZOO_MY_ID:</span> <span class="number">1</span></div><div class="line"><span class="attr">      ZOO_SERVERS:</span> server<span class="number">.1</span>=zoo1:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.2</span>=zoo2:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.3</span>=zoo3:<span class="number">2888</span>:<span class="number">3888</span></div><div class="line"><span class="attr">  zoo2:</span></div><div class="line"><span class="attr">    image:</span> zookeeper:latest</div><div class="line"><span class="attr">    container_name:</span> zoo2</div><div class="line"><span class="attr">    ports:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"21812:2181"</span></div><div class="line"><span class="attr">    networks:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></div><div class="line"><span class="attr">    expose:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"2888"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"3888"</span></div><div class="line"><span class="attr">    volumes:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo2/data:/data:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo2/datalog:/datalog:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo2/conf:/conf:rw"</span></div><div class="line"><span class="attr">    environment:</span></div><div class="line"><span class="attr">      ZOO_MY_ID:</span> <span class="number">2</span></div><div class="line"><span class="attr">      ZOO_SERVERS:</span> server<span class="number">.1</span>=zoo1:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.2</span>=zoo2:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.3</span>=zoo3:<span class="number">2888</span>:<span class="number">3888</span></div><div class="line"><span class="attr">  zoo3:</span></div><div class="line"><span class="attr">    image:</span> zookeeper:latest</div><div class="line"><span class="attr">    container_name:</span> zoo3</div><div class="line"><span class="attr">    ports:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"21813:2181"</span></div><div class="line"><span class="attr">    networks:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></div><div class="line"><span class="attr">    expose:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"2888"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"3888"</span></div><div class="line"><span class="attr">    volumes:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo3/data:/data:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo3/datalog:/datalog:rw"</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo3/conf:/conf:rw"</span></div><div class="line"><span class="attr">    environment:</span></div><div class="line"><span class="attr">      ZOO_MY_ID:</span> <span class="number">3</span></div><div class="line"><span class="attr">      ZOO_SERVERS:</span> server<span class="number">.1</span>=zoo1:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.2</span>=zoo2:<span class="number">2888</span>:<span class="number">3888</span> server<span class="number">.3</span>=zoo3:<span class="number">2888</span>:<span class="number">3888</span></div><div class="line"><span class="attr">  zk-manager:</span></div><div class="line"><span class="attr">    image:</span> fify/node-zk-browser:latest</div><div class="line"><span class="attr">    container_name:</span> zk-manager</div><div class="line"><span class="attr">    restart:</span> always</div><div class="line"><span class="attr">    depends_on:</span></div><div class="line"><span class="bullet">      -</span> zoo1</div><div class="line"><span class="bullet">      -</span> zoo2</div><div class="line"><span class="bullet">      -</span> zoo3</div><div class="line"><span class="attr">    ports:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"3000:3000"</span></div><div class="line"><span class="attr">    networks:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></div><div class="line"><span class="attr">    expose:</span></div><div class="line"><span class="bullet">      -</span> <span class="string">"3000"</span></div><div class="line"><span class="attr">    environment:</span></div><div class="line"><span class="attr">      ZK_HOST:</span> zoo1:<span class="number">2181</span>,zoo2:<span class="number">2181</span>,zoo3:<span class="number">2181</span></div></pre></td></tr></table></figure>
-<h3 id="运行服务"><a href="#运行服务" class="headerlink" title="运行服务"></a>运行服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">➜  docker docker-compose <span class="_">-f</span> zookeeper.yml up --remove <span class="_">-d</span></div><div class="line">Starting zoo3</div><div class="line">Starting zoo2</div><div class="line">Starting zoo1</div><div class="line">Starting zk-manager</div><div class="line">➜  docker docker-compose  <span class="_">-f</span> zookeeper.yml ps</div><div class="line">   Name                 Command               State                      Ports</div><div class="line">-------------------------------------------------------------------------------------------------</div><div class="line">zk-manager   /opt/node-zk-browser/start.sh    Up      0.0.0.0:3000-&gt;3000/tcp</div><div class="line">zoo1         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21811-&gt;2181/tcp, 2888/tcp, 3888/tcp</div><div class="line">zoo2         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21812-&gt;2181/tcp, 2888/tcp, 3888/tcp</div><div class="line">zoo3         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21813-&gt;2181/tcp, 2888/tcp, 3888/tcp</div></pre></td></tr></table></figure>
-<h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><p>通过zkCli访问:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">➜  docker zkCli -server 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</div><div class="line">Connecting to 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</div><div class="line">Welcome to ZooKeeper!</div><div class="line">JLine support is enabled</div><div class="line"></div><div class="line">WATCHER::</div><div class="line"></div><div class="line">WatchedEvent state:SyncConnected <span class="built_in">type</span>:None path:null</div><div class="line">[zk: 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813(CONNECTED) 0]</div></pre></td></tr></table></figure>
-<p>node-zk-browser web界面 地址：<a href="http://127.0.0.1:3000" target="_blank" rel="external">http://127.0.0.1:3000</a></p>
-<p><img src="/2017/03/01/docker-zookeeper-cluster/node-zk-web.png" alt="noke-zk-browser"></p>
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
-<li>集群包含三个zookeeper节点:zoo1,zoo2,zoo3,分别监听本地21811,21812,21813三个端口,docker端口为2181</li>
-<li>各个zookeeper节点数据存储在本地./storge/zoo1,zoo2,zoo3。</li>
-<li>zookeeper节点通过docker端口2888,3888进行通讯,2888为选举端口,3888为备选端口</li>
-<li>node-zk-browser通过docker端口2181访问各个zookeeper节点,本地监听3000端口</li>
-</ul>
-<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><ul>
-<li>node-zk-browser界面丑出天际有没有(ノ ﾟДﾟ)ノ　＝＝＝＝　┻━━┻?<br>谁有更好的选择推荐一下。</li>
-<li>目前无法使用docker-compose scale动态扩展zookeeper节点,因为ZOO_MY_ID和ZOO_SERVERS选项需要在配置文件中制定,但这一方面并不是很重要,一般情况下并不需要扩展节点。</li>
-</ul>
+</blockquote>
+<p>该命令生成了一个包含spring基本组件的项目<br>目录结构不写了,标准的java项目,只说一下application.properties. 这个文件是spring boot的应用配置文件<a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/" title="spring-boot-doc" target="_blank" rel="external">spring-boot-doc</a>,我们添加一个<code>server.port=9527</code>,这个配置会修改嵌入tomcat的监听端口。</p>
+<p>application.properties中的配置内容在spring boot中引用,下面的例子会讲。</p>
+<h2 id="coding"><a href="#coding" class="headerlink" title="coding"></a>coding</h2><p>进入项目目录添加新类<code>DemoApplication.java</code>内容如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.example;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.EnableAutoConfiguration;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"></div><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableAutoConfiguration</span></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> </span>&#123;</div><div class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;server.port&#125;"</span>)</div><div class="line">	<span class="keyword">public</span> Integer port;</div><div class="line">	<span class="meta">@RequestMapping</span>(value = <span class="string">"/hi"</span>)</div><div class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">hi</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">"helloWorld:"</span> + <span class="keyword">this</span>.port;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		SpringApplication.run(DemoApplication.class, args);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>说明:访问<code>/hi</code>服务端会返回”helloworld” 和我们在application.properties配置的端口信息.</p>
+<h2 id="package-amp-amp-run"><a href="#package-amp-amp-run" class="headerlink" title="package &amp;&amp; run"></a>package &amp;&amp; run</h2><p>运行命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">mvn clean  package</div><div class="line">[INFO]</div><div class="line">[INFO] --- maven-jar-plugin:2.6:jar (default-jar) @ http-demo ---</div><div class="line">[INFO] Building jar: /Users/zhaoliang/project/http-demo/target/http-demo-0.0.1-SNAPSHOT.jar</div><div class="line">[INFO]</div><div class="line">[INFO] --- spring-boot-maven-plugin:1.5.2.RELEASE:repackage (default) @ http-demo ---</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">[INFO] BUILD SUCCESS</div><div class="line">[INFO] ------------------------------------------------------------------------</div><div class="line">[INFO] Total time: 4.690 s</div><div class="line">[INFO] Finished at: 2017-03-10T14:26:57+08:00</div><div class="line">[INFO] Final Memory: 28M/312M</div><div class="line">[INFO] ------------------------------------------------------------------------</div></pre></td></tr></table></figure></p>
+<p><code>./target/http-demo-0.0.1-SNAPSHOT.jar</code>为打包结果。</p>
+<p>本地运行:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar target/http-demo-0.0.1-SNAPSHOT.jar</div></pre></td></tr></table></figure></p>
+<p>查看结果:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl http://127.0.0.1:9527/hi</div><div class="line">helloWorld:9527%</div></pre></td></tr></table></figure></p>
+<h2 id="使用容器运行"><a href="#使用容器运行" class="headerlink" title="使用容器运行"></a>使用容器运行</h2><p>我们使用<code>bankmonitor/spring-boot</code>镜像来运行spring boot程序,镜像启动时候会执行如下cmd:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CMD [\<span class="string">"/bin/sh\" \"-c\" \"java <span class="variable">$JAVA_OPTS</span> -jar /app/app.jar --spring.profiles.active=<span class="variable">$SPRING_PROFILES_ACTIVE</span>\"]</span></div></pre></td></tr></table></figure></p>
+<p>这就简单了,我们只需要在容器启动时将<code>./target/http-demo-0.0.1-SNAPSHOT.jar</code>挂载到容器文件<code>/app/app.jar</code>即可<br>运行命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --rm -v <span class="string">"<span class="variable">$PWD</span>/target/http-demo-0.0.1-SNAPSHOT.jar:/app/app.jar"</span> -p <span class="string">"10086:9527"</span> bankmonitor/spring-boot</div></pre></td></tr></table></figure></p>
+<p>我们把容器9527端口映射到本地10086端口（´➰｀)</p>
+<p>查看结果:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl http://127.0.0.1:10086/hi</div><div class="line">helloWorld:10086%</div></pre></td></tr></table></figure></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>spring-boot非常适合作为docker java微框架相当好用,简化了大分布的配置操作,再今后如有使用到新的特性与依赖,会再做分享。</p>
 
       
     </div>
@@ -493,9 +487,9 @@
           
             <a href="/tags/docker/" rel="tag"># docker</a>
           
-            <a href="/tags/docker-compose/" rel="tag"># docker-compose</a>
+            <a href="/tags/spring-boot/" rel="tag"># spring-boot</a>
           
-            <a href="/tags/zookeeper/" rel="tag"># zookeeper</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -508,15 +502,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/03/02/docker-kafka-cluster/" rel="next" title="使用docker创建kafka集群">
+                <i class="fa fa-chevron-left"></i> 使用docker创建kafka集群
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/02/docker-kafka-cluster/" rel="prev" title="使用docker创建kafka集群">
-                使用docker创建kafka集群 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -565,8 +559,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/01/docker-zookeeper-cluster/"
-           data-title="使用docker创建zookeeper集群" data-url="http://z-caterpillar.github.io/2017/03/01/docker-zookeeper-cluster/">
+      <div class="ds-thread" data-thread-key="2017/03/10/docker-spring-boot/"
+           data-title="spring-boot微框架创建java docker应用" data-url="http://z-caterpillar.github.io/2017/03/10/docker-spring-boot/">
       </div>
     
   </div>
@@ -695,7 +689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原料"><span class="nav-number">1.</span> <span class="nav-text">原料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑zookeeper-yml配置文件"><span class="nav-number">2.1.</span> <span class="nav-text">编辑zookeeper.yml配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行服务"><span class="nav-number">2.2.</span> <span class="nav-text">运行服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方式"><span class="nav-number">2.3.</span> <span class="nav-text">使用方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">3.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遗留问题"><span class="nav-number">4.</span> <span class="nav-text">遗留问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原料"><span class="nav-number">1.</span> <span class="nav-text">原料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用spring-boot微框架初始化项目"><span class="nav-number">2.</span> <span class="nav-text">使用spring boot微框架初始化项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#coding"><span class="nav-number">3.</span> <span class="nav-text">coding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#package-amp-amp-run"><span class="nav-number">4.</span> <span class="nav-text">package && run</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用容器运行"><span class="nav-number">5.</span> <span class="nav-text">使用容器运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
 
           </div>
