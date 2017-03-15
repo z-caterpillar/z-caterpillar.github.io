@@ -32,9 +32,9 @@
       <category term="技术" scheme="http://z-caterpillar.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="java" scheme="http://z-caterpillar.github.io/tags/java/"/>
-    
       <category term="kafka" scheme="http://z-caterpillar.github.io/tags/kafka/"/>
+    
+      <category term="java" scheme="http://z-caterpillar.github.io/tags/java/"/>
     
   </entry>
   
@@ -43,7 +43,7 @@
     <link href="http://z-caterpillar.github.io/2017/03/10/docker-spring-boot/"/>
     <id>http://z-caterpillar.github.io/2017/03/10/docker-spring-boot/</id>
     <published>2017-03-10T04:04:28.000Z</published>
-    <updated>2017-03-10T07:40:10.000Z</updated>
+    <updated>2017-03-15T00:40:56.000Z</updated>
     
     <summary type="html">
     
@@ -56,9 +56,9 @@
       <category term="技术" scheme="http://z-caterpillar.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="spring-boot" scheme="http://z-caterpillar.github.io/tags/spring-boot/"/>
-    
       <category term="docker" scheme="http://z-caterpillar.github.io/tags/docker/"/>
+    
+      <category term="spring-boot" scheme="http://z-caterpillar.github.io/tags/spring-boot/"/>
     
       <category term="java" scheme="http://z-caterpillar.github.io/tags/java/"/>
     
