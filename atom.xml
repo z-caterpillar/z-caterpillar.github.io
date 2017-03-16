@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://z-caterpillar.github.io/"/>
-  <updated>2017-03-10T08:02:09.000Z</updated>
+  <updated>2017-03-16T09:14:39.000Z</updated>
   <id>http://z-caterpillar.github.io/</id>
   
   <author>
@@ -16,16 +16,17 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>kafka java客户端实例</title>
+    <title>java kafka-client应用与http实现</title>
     <link href="http://z-caterpillar.github.io/2017/03/10/kafka-java-client/"/>
     <id>http://z-caterpillar.github.io/2017/03/10/kafka-java-client/</id>
     <published>2017-03-10T07:41:07.000Z</published>
-    <updated>2017-03-10T08:02:09.000Z</updated>
+    <updated>2017-03-16T09:14:39.000Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;kafa java 客户端实例。实例中包含producer,consumer的几种场景。&lt;/p&gt;
-
+      &lt;p&gt;使用kafka-client实现producer api与consumer api,并且提供简单的http接口&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;大多数情况下,我们使用kafka-connect来做kafka集群数据的收集与导出,使用kafka-steams api来做流式处理。在这之前我们先来了解一下java kafka client。&lt;br&gt;kafka不是一个有序的消息队列,&lt;br&gt;kafka不是一个有序的消息队列,&lt;br&gt;kafka不是一个有序的消息队列,&lt;br&gt;重要的事情说三遍。(￣▽￣;)&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
     
     </summary>
     
@@ -34,7 +35,13 @@
     
       <category term="kafka" scheme="http://z-caterpillar.github.io/tags/kafka/"/>
     
+      <category term="spring-boot" scheme="http://z-caterpillar.github.io/tags/spring-boot/"/>
+    
       <category term="java" scheme="http://z-caterpillar.github.io/tags/java/"/>
+    
+      <category term="kafka-client" scheme="http://z-caterpillar.github.io/tags/kafka-client/"/>
+    
+      <category term="queue" scheme="http://z-caterpillar.github.io/tags/queue/"/>
     
   </entry>
   
@@ -43,7 +50,7 @@
     <link href="http://z-caterpillar.github.io/2017/03/10/docker-spring-boot/"/>
     <id>http://z-caterpillar.github.io/2017/03/10/docker-spring-boot/</id>
     <published>2017-03-10T04:04:28.000Z</published>
-    <updated>2017-03-15T00:40:56.000Z</updated>
+    <updated>2017-03-15T05:36:01.000Z</updated>
     
     <summary type="html">
     
@@ -69,7 +76,7 @@
     <link href="http://z-caterpillar.github.io/2017/03/02/docker-kafka-cluster/"/>
     <id>http://z-caterpillar.github.io/2017/03/02/docker-kafka-cluster/</id>
     <published>2017-03-02T15:22:44.000Z</published>
-    <updated>2017-03-08T10:01:19.000Z</updated>
+    <updated>2017-03-16T02:11:00.000Z</updated>
     
     <summary type="html">
     
