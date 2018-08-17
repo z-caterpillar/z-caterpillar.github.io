@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>塔塔拉夏的博客</title>
+  
   <subtitle>君子乾乾,夕惕若厉.</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://z-caterpillar.github.io/"/>
-  <updated>2017-03-16T09:55:28.000Z</updated>
+  <updated>2018-08-17T09:01:14.034Z</updated>
   <id>http://z-caterpillar.github.io/</id>
   
   <author>
@@ -14,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>整数数据类型与表示形式</title>
+    <link href="http://z-caterpillar.github.io/2018/08/16/numbers-data-type/"/>
+    <id>http://z-caterpillar.github.io/2018/08/16/numbers-data-type/</id>
+    <published>2018-08-16T06:26:18.000Z</published>
+    <updated>2018-08-17T09:01:14.034Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;Java数值型数据类型简单介绍；&lt;br&gt;数值的二进制表示方式以及运算原理；&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://z-caterpillar.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="java" scheme="http://z-caterpillar.github.io/tags/java/"/>
+    
+      <category term="基础" scheme="http://z-caterpillar.github.io/tags/%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="原理" scheme="http://z-caterpillar.github.io/tags/%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
   
   <entry>
     <title>java kafka-client应用与http实现</title>
