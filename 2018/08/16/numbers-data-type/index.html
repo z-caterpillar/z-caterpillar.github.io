@@ -6,15 +6,15 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -32,7 +32,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -66,23 +66,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="java,基础,原理," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="塔塔拉夏的博客" type="application/atom+xml" />
+  <meta name="keywords" content="java,基础,原理,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+  <link rel="alternate" href="/atom.xml" title="塔塔拉夏的博客" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
 
 
 
@@ -92,14 +92,14 @@
 <meta name="description" content="Java数值型数据类型简单介绍；数值的二进制表示方式以及运算原理；">
 <meta name="keywords" content="java,基础,原理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="整数数据类型与表示形式">
+<meta property="og:title" content="整数数据类型表示形式">
 <meta property="og:url" content="http://z-caterpillar.github.io/2018/08/16/numbers-data-type/index.html">
 <meta property="og:site_name" content="塔塔拉夏的博客">
 <meta property="og:description" content="Java数值型数据类型简单介绍；数值的二进制表示方式以及运算原理；">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-17T09:01:14.034Z">
+<meta property="og:updated_time" content="2019-11-11T09:48:47.178Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="整数数据类型与表示形式">
+<meta name="twitter:title" content="整数数据类型表示形式">
 <meta name="twitter:description" content="Java数值型数据类型简单介绍；数值的二进制表示方式以及运算原理；">
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://z-caterpillar.github.io/2018/08/16/numbers-data-type/"/>
+  <link rel="canonical" href="http://z-caterpillar.github.io/2018/08/16/numbers-data-type/">
 
 
 
 
 
-  <title> 整数数据类型与表示形式 | 塔塔拉夏的博客 </title>
+  <title> 整数数据类型表示形式 | 塔塔拉夏的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -168,7 +168,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">塔塔拉夏的博客</span>
         <span class="logo-line-after"><i></i></span>
@@ -198,7 +198,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -208,7 +208,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -218,7 +218,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -228,7 +228,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -238,7 +238,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -248,7 +248,7 @@
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
             
             公益404
           </a>
@@ -261,7 +261,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -319,7 +319,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="塔塔拉夏">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/image/my.png">
     </span>
 
@@ -336,7 +336,7 @@
             
             
               
-                整数数据类型与表示形式
+                整数数据类型表示形式
               
             
           </h1>
@@ -362,7 +362,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -489,14 +489,14 @@
 </tr>
 <tr>
 <td>反码</td>
-<td>负数:原码取反<br>正数:原码</td>
+<td>负数:符号位不变原码取反<br>正数:原码</td>
 <td>01111111:127</td>
 <td>10000000:-127</td>
 <td>00000000<br>11111111</td>
 </tr>
 <tr>
 <td>补码</td>
-<td>负数:原码取反+1<br>正数:原码</td>
+<td>负数:符号位不变原码取反+1<br>正数:原码</td>
 <td>01111111:127</td>
 <td>后面讲</td>
 <td>00000000<br>00000000</td>
@@ -506,7 +506,8 @@
 <ul>
 <li>原码与补码存在的问题：<ul>
 <li>原码：无法计算负数 比如 (原)10000001(-1) + (原)10000010(-2) = (原)00000011(3)</li>
-<li>反码：无法计算正数加负数 比如 (反)11111110(-1) + (反)00000010(2) = (反)00000000(0)</li>
+<li>反码：无法计算正数加负数 比如 (反)11111110(-1) + (反)00000010(2) = (反)10000000(0)</li>
+<li>根本原因：符号位参与运算导致错误,如果符号位不参与运算那就都是正数加法了</li>
 </ul>
 </li>
 <li>补码的最小值为10000000:-128可以理解为一种特殊性，原因简单分析一下:<ul>
@@ -515,16 +516,16 @@
 <li>补码0只占一个位置,所以选用一个极为特殊的(补)10000000作为-128。 这个补码很特殊，他们原码和补码是一样。</li>
 </ul>
 </li>
-<li>总结下补码的特性：<ul>
-<li>补码的补码等于源码</li>
-<li>补码0只有一种表示形式</li>
-<li>补码的范围与数学意义上的模相同。</li>
+<li>计算机为什么选择补码作为表示形式：<ul>
+<li>补码+0与-0相同,范围多一位.</li>
+<li>补码可以把减法转为加法2(补)-2(补) = 2(补)+(-2)(补), 2(补)-(-2)(补) = 2(补) + 2(补)</li>
+<li>补码的补码等于原码.</li>
+<li>符号位可参与运算.</li>
 </ul>
 </li>
 </ul>
-<h3 id="整数类型的运算"><a href="#整数类型的运算" class="headerlink" title="整数类型的运算"></a>整数类型的运算</h3><ul>
-<li>加减法不说，这两个运算比较简单。</li>
-<li>乘法与除法的基本原则：把除法转成乘法，乘法转成加法，减法也转成加法。</li>
+<h3 id="处理器操作"><a href="#处理器操作" class="headerlink" title="处理器操作"></a>处理器操作</h3><p>  cpu是一个物理电路系统,基本电路只能进行以下几种操作,并且寄存器有数量限制,寄存器的大小有位数限制。</p>
+<ul>
 <li>位运算：直接对整型的二进制位进行操作。<ul>
 <li>与（&amp;）：都为1则为1，否则0<ul>
 <li>清零，或者部分位清零，比如：10101010 &amp; 00001111 = 00001010，此为前4位清零</li>
@@ -534,29 +535,141 @@
 <li>置一，或者部分位置一，比如：10101010 | 00001111 = 10101111，此为后4位置一</li>
 </ul>
 </li>
-<li>异或（^）：相同为0，不同为1<ul>
-<li>取得原值，与0异或得原址，比如：10101010 ^ 00000000 = 1010101</li>
+<li>异或（⊕）：相同为0，不同为1<ul>
+<li>取得原值，与0异或得原址，比如：10101010 ^ 00000000 = 10101010</li>
 <li>取反，与1异或取反，比如：10101010 ^ 11111111 = 01010101</li>
 </ul>
 </li>
 <li>非（～）：取反</li>
 </ul>
 </li>
-<li>位移操作：<ul>
-<li>左移（&lt;&lt;）：正数负数采用同样的方式，左移指定位数(超出范围取模)，高位抛弃，低位补0<ul>
-<li>比如：00000101(5) &lt;&lt; 1 = 00001010(10);00000101(5) &lt;&lt; 2 = 00010100(20)</li>
-<li>如果字长为8位，则 &lt;&lt; 1 与 &lt;&lt; 9 相同。</li>
-<li>左移是乘2，公式 y = x * (2**位数），左移1位相当于乘2，左移2位相当于乘4</li>
+<li>位移操作（一般来讲我们都是在说算术位移,这里我们用负数补码来举例）：<ul>
+<li>算术左移（&lt;&lt;）：正数负数采用同样的方式，左移指定位数取模字长，高位抛弃，低位补0<ul>
+<li>比如：11111011(-5)(补) &lt;&lt; 1%8 = 11110110(-10)(补);11111011(-5)(补) &lt;&lt; 2%8 = 11101100(20)(补)</li>
+<li>如果字长为8位,则 &lt;&lt; 1%8 与 &lt;&lt; 9%8 相同。</li>
+<li>左移是增倍。</li>
 </ul>
 </li>
-<li>带符号右移（&gt;&gt;）：右移动指定位数，高位补符号位，低位抛弃<ul>
-<li>比如：00000111(7) &gt;&gt; 1 = 00000011(3); 00000111(7) &gt;&gt; 2 = 00000001(1)</li>
-<li>右移是除2取商，公式 y = 商(x / (2**位数))</li>
+<li>算术右移（&gt;&gt;）：右移动指定位数，高位补符号位，低位抛弃<ul>
+<li>比如：00000111(7)(补) &gt;&gt; 1 = 00000011(3)(补); 00000111(7)(补) &gt;&gt; 2 = 00000001(1)(补)</li>
+<li>右移是减半。</li>
 </ul>
 </li>
-<li>无符号右移（&gt;&gt;&gt;）：右移动指定位数，高位补0，低位抛弃</li>
+<li>逻辑左移 (&lt;&lt;) ：与算术右移相同</li>
+<li>逻辑右移（&gt;&gt;&gt;）：右移动指定位数，高位补0，低位抛弃，基本没用。</li>
+<li>问题：如果负数左移导致符号为0或者正数左移符号为1会如何？<ul>
+<li>比如：10001000(-120)(补) &lt;&lt; 1 = 00010000(112)(补)</li>
+<li>很奇怪是不是,但是120的绝对值已经大于128/2,左移必然溢出。</li>
+<li>所以,支持左移的二进制数,必须是最高位与符号位相同,不然一定会溢出。</li>
 </ul>
 </li>
+<li>总结：<ul>
+<li>逻辑位移针对无符号数增倍或减半。</li>
+<li>算术位移针对有符号数增倍或减半。</li>
+<li>左移的最高位与符号位一定要相同,不然溢出。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="整数类型的运算"><a href="#整数类型的运算" class="headerlink" title="整数类型的运算"></a>整数类型的运算</h3><p>  cpu使用简单的位运算进行各种复杂的运算</p>
+<ul>
+<li>加法<ul>
+<li>分析每一位做加法的几种情况-小学数学(^^!)</li>
+<li>任何一个位相加都是只有这四种可能情况。</li>
+<li>总结一下规律：结果 = 加数 | 被加数, 进位 =  加数 &amp; 被加数</li>
+<li>这样使用一个与门和一个非门就可以完成一个加法器</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">加数</th>
+<th style="text-align:left">被加数</th>
+<th style="text-align:left">结果</th>
+<th style="text-align:left">进位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>减法<ul>
+<li>与加法相同,加法器再加一个补码转换器即可。</li>
+</ul>
+</li>
+<li>乘法<ul>
+<li>基本原理为将乘法转为加法</li>
+<li>比如 00001010(10)(补) x 00000101(5)(补) = （00000001(1)(补) + 00000100(4)(补)）x 00001010(10)(补) = 00000001(1)(补) x 00001010(10)(补) + 00000100(4)(补) x 00001010(10)(补)</li>
+<li>最后的等于可以理解为00001010(10)(补) &lt;&lt; 1%8 + 00001010(10)(补) &lt;&lt; 4%8</li>
+<li>这样乘法就被转为加法与位移操作。</li>
+<li>计算机具体操作方式如下</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">被乘数</th>
+<th style="text-align:left">乘数</th>
+<th style="text-align:left">部分积</th>
+<th style="text-align:left">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">00001010(10)</td>
+<td style="text-align:left">00000101(5)</td>
+<td style="text-align:left">00000000(0)</td>
+<td style="text-align:left">初始化</td>
+</tr>
+<tr>
+<td style="text-align:left">00001010(10)</td>
+<td style="text-align:left">00000101(5)</td>
+<td style="text-align:left">00000000(0) + 00001010(10) = 00001010(10)</td>
+<td style="text-align:left">判断乘数最低位为1,则部分积+=被乘数</td>
+</tr>
+<tr>
+<td style="text-align:left">00001010(10)</td>
+<td style="text-align:left">00000010(4)</td>
+<td style="text-align:left">00000101(5)</td>
+<td style="text-align:left">部分积算术右移1位。低位溢出到乘数最高位，乘数最低位溢出丢弃,</td>
+</tr>
+<tr>
+<td style="text-align:left">00001010(10)</td>
+<td style="text-align:left">00000010(4)</td>
+<td style="text-align:left">00000101(5)</td>
+<td style="text-align:left">判断乘数最低位为0,继续</td>
+</tr>
+</tbody>
+</table>
+<p>  与除法的基本原则：把除法转成乘法，乘法转成加法，减法也转成加法。</p>
+<ul>
 <li>乘法操作-累加被乘数：<ul>
 <li>上一部分内容我们知道左移动相当于乘2,也相当于与自己相加。但是无法进行*3操作</li>
 <li>假设我们要处理x<em>7,则x</em>7 = x <em> ((2<strong>2) + (2</strong>1) + (2**0)) = x</em>(2<strong>2) + x*(2</strong>1) + x*(2**0) = x&lt;&lt;2 + x&lt;&lt;1 + x&lt;&lt;0</li>
@@ -590,7 +703,7 @@
     <div id="QR" style="display: none;">
       
         <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/image/pay.jpeg" alt="塔塔拉夏 WeChat Pay"/>
+          <img id="wechat_qr" src="/image/pay.jpeg" alt="塔塔拉夏 WeChat Pay">
           <p>微信打赏</p>
         </div>
       
@@ -634,6 +747,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/08/22/conversion-of-number/" rel="prev" title="进制转换">
+                进制转换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -661,7 +778,7 @@
   <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
   <a class="jiathis_counter_style"></a>
 </div>
-<script type="text/javascript" >
+<script type="text/javascript">
   var jiathis_config={
     hideMore:false
   }
@@ -681,8 +798,7 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2018/08/16/numbers-data-type/"
-           data-title="整数数据类型与表示形式" data-url="http://z-caterpillar.github.io/2018/08/16/numbers-data-type/">
+      <div class="ds-thread" data-thread-key="2018/08/16/numbers-data-type/" data-title="整数数据类型表示形式" data-url="http://z-caterpillar.github.io/2018/08/16/numbers-data-type/">
       </div>
     
   </div>
@@ -707,7 +823,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -718,9 +834,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/image/my.png"
-               alt="塔塔拉夏" />
+          <img class="site-author-image" itemprop="image" src="/image/my.png" alt="塔塔拉夏">
           <p class="site-author-name" itemprop="name">塔塔拉夏</p>
            
               <p class="site-description motion-element" itemprop="description">工程师。</p>
@@ -731,7 +845,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -749,7 +863,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -811,7 +925,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数值类型基本介绍"><span class="nav-number">1.</span> <span class="nav-text">数值类型基本介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整数的二进制表示方式"><span class="nav-number">2.</span> <span class="nav-text">整数的二进制表示方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整数类型的运算"><span class="nav-number">3.</span> <span class="nav-text">整数类型的运算</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数值类型基本介绍"><span class="nav-number">1.</span> <span class="nav-text">数值类型基本介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整数的二进制表示方式"><span class="nav-number">2.</span> <span class="nav-text">整数的二进制表示方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理器操作"><span class="nav-number">3.</span> <span class="nav-text">处理器操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整数类型的运算"><span class="nav-number">4.</span> <span class="nav-text">整数类型的运算</span></a></li></ol></div>
             
 
           </div>
@@ -838,10 +952,10 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

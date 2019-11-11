@@ -6,15 +6,15 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -32,7 +32,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -66,23 +66,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="kafka,spring-boot,java,kafka-client,queue," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="塔塔拉夏的博客" type="application/atom+xml" />
+  <meta name="keywords" content="java,kafka,spring-boot,kafka-client,queue,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+  <link rel="alternate" href="/atom.xml" title="塔塔拉夏的博客" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
 
 
 
@@ -90,7 +90,7 @@
 
 
 <meta name="description" content="使用kafka-client实现producer api与consumer api,并且提供简单的http接口  大多数情况下,我们使用kafka-connect来做kafka集群数据的收集与导出,使用kafka-steams api来做流式处理。在这之前我们先来了解一下java kafka client。kafka不是一个有序的消息队列,kafka不是一个有序的消息队列,kafka不是一个有序的">
-<meta name="keywords" content="kafka,spring-boot,java,kafka-client,queue">
+<meta name="keywords" content="java,kafka,spring-boot,kafka-client,queue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java kafka-client应用与http实现">
 <meta property="og:url" content="http://z-caterpillar.github.io/2017/03/10/kafka-java-client/index.html">
@@ -128,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://z-caterpillar.github.io/2017/03/10/kafka-java-client/"/>
+  <link rel="canonical" href="http://z-caterpillar.github.io/2017/03/10/kafka-java-client/">
 
 
 
@@ -168,7 +168,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">塔塔拉夏的博客</span>
         <span class="logo-line-after"><i></i></span>
@@ -198,7 +198,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -208,7 +208,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -218,7 +218,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -228,7 +228,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -238,7 +238,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -248,7 +248,7 @@
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
             
             公益404
           </a>
@@ -261,7 +261,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -319,7 +319,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="塔塔拉夏">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/image/my.png">
     </span>
 
@@ -362,7 +362,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -558,7 +558,7 @@ fair share of the partitions for those topics based on the active consumers in t
 <h3 id="修改pom-xml添加依赖"><a href="#修改pom-xml添加依赖" class="headerlink" title="修改pom.xml添加依赖"></a>修改pom.xml添加依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.kafka<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-kafka<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.2.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>说明：spring-kafka包含kafka-client</p>
 <h3 id="修改application-properties"><a href="#修改application-properties" class="headerlink" title="修改application.properties"></a>修改application.properties</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#server</span><br><span class="line">server.port=9527</span><br><span class="line"></span><br><span class="line">#kafka</span><br><span class="line">kafka.global.bootstrap.servers=kafka1:9092,kafka2:9092,kafka3:9092</span><br><span class="line">kafka.producer.key.serializer=org.apache.kafka.common.serialization.StringSerializer</span><br><span class="line">kafka.producer.value.serializer=org.apache.kafka.common.serialization.StringSerializer</span><br><span class="line">kafka.producer.kakfa.global.compression.type=org.apache.kafka.common.serialization.StringSerializer</span><br><span class="line">kafka.consumer.key.deserializer=org.apache.kafka.common.serialization.StringDeserializer</span><br><span class="line">kafka.consumer.value.deserializer=org.apache.kafka.common.serialization.StringDeserializer</span><br><span class="line">kafka.consumer.auto.offset.reset=earliest</span><br></pre></td></tr></table></figure>
-<h3 id="编写DemoApplication-java"><a href="#编写DemoApplication-java" class="headerlink" title="编写DemoApplication.java"></a>编写DemoApplication.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRecord;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRecords;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.consumer.KafkaConsumer;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.producer.KafkaProducer;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.producer.ProducerRecord;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.CommandLineRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.EnableAutoConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.kafka.annotation.EnableKafka;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"ALL"</span>)</span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@EnableKafka</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.global.bootstrap.servers&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String bootStrapServers;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.producer.key.serializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String keySerializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.producer.value.serializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String valueSerializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.consumer.key.deserializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String keyDeserializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.consumer.value.deserializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String valueDeserializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.consumer.auto.offset.reset&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String autoOffsetReset;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RequestMapping</span>(value = <span class="string">"/producer/&#123;topics&#125;/&#123;key&#125;/&#123;value&#125;"</span>)</span><br><span class="line">	<span class="meta">@ResponseBody</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> HashMap <span class="title">producer</span><span class="params">(@PathVariable(value = <span class="string">"topics"</span>)</span> String topics,@<span class="title">PathVariable</span><span class="params">(value = <span class="string">"value"</span>)</span> String value,@<span class="title">PathVariable</span><span class="params">(value = <span class="string">"key"</span>)</span> String key) </span>&#123;</span><br><span class="line">		List&lt;String&gt; topicList = Arrays.asList(topics.split(<span class="string">","</span>));</span><br><span class="line">		HashMap resultMap = <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">		Properties producerProperties = getProducerProperties();</span><br><span class="line">		KafkaProducer&lt;String,String&gt; kafkaProducer = <span class="keyword">new</span> KafkaProducer&lt;String,String&gt;(producerProperties);</span><br><span class="line">		<span class="keyword">for</span> (String topic :</span><br><span class="line">				topicList) &#123;</span><br><span class="line">			ProducerRecord&lt;String,String&gt; producerRecord = <span class="keyword">new</span> ProducerRecord&lt;String,String&gt;(topic,key,value);</span><br><span class="line"></span><br><span class="line">			kafkaProducer.send(producerRecord);</span><br><span class="line">		&#125;</span><br><span class="line">		kafkaProducer.close();</span><br><span class="line">		resultMap.put(<span class="string">"topics"</span>,topicList);</span><br><span class="line">		resultMap.put(<span class="string">"value"</span>,value);</span><br><span class="line">		resultMap.put(<span class="string">"key"</span>,key);</span><br><span class="line">		<span class="keyword">return</span> resultMap;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@RequestMapping</span>(value = <span class="string">"/consumer/&#123;topics&#125;/&#123;limit&#125;"</span>)</span><br><span class="line">	<span class="meta">@ResponseBody</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> HashMap <span class="title">consumer</span><span class="params">(@PathVariable(value = <span class="string">"topics"</span>)</span> String topics,@<span class="title">PathVariable</span><span class="params">(<span class="string">"limit"</span>)</span> String limit,@<span class="title">RequestParam</span><span class="params">(value = <span class="string">"group.id"</span>,defaultValue = <span class="string">""</span>,required = <span class="keyword">false</span>)</span> String groupId) </span>&#123;</span><br><span class="line">		List&lt;String&gt; topicList = Arrays.asList(topics.split(<span class="string">","</span>));</span><br><span class="line">		HashMap resultMap = <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">		Properties consumerProperties = getConsumerProperties();</span><br><span class="line">		<span class="keyword">if</span> (groupId.length() == <span class="number">0</span>) &#123;</span><br><span class="line">			consumerProperties.put(<span class="string">"group.id"</span>,UUID.randomUUID().toString());</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			consumerProperties.put(<span class="string">"group.id"</span>,groupId);</span><br><span class="line">		&#125;</span><br><span class="line">		consumerProperties.put(<span class="string">"max.poll.records"</span>,limit);</span><br><span class="line">		KafkaConsumer&lt;String,String&gt; kafkaConsumer  = <span class="keyword">new</span> KafkaConsumer&lt;String,String&gt;(consumerProperties);</span><br><span class="line">		kafkaConsumer.subscribe(topicList);</span><br><span class="line">		ConsumerRecords&lt;String,String&gt; consumerRecords = kafkaConsumer.poll(<span class="number">1000</span>);</span><br><span class="line">		resultMap.put(<span class="string">"topics"</span>,topicList);</span><br><span class="line">		List&lt;Map&gt; recordList = <span class="keyword">new</span> ArrayList&lt;Map&gt;();</span><br><span class="line">		<span class="keyword">for</span> (ConsumerRecord&lt;String, String&gt; record : consumerRecords) &#123;</span><br><span class="line">			HashMap&lt;String,String&gt; recordMap =  <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">			recordMap.put(<span class="string">"key"</span>,record.key());</span><br><span class="line">			recordMap.put(<span class="string">"value"</span>,record.value());</span><br><span class="line">			recordMap.put(<span class="string">"offset"</span>, String.valueOf(record.offset()));</span><br><span class="line">			recordMap.put(<span class="string">"partition"</span>, String.valueOf(record.partition()));</span><br><span class="line">			recordMap.put(<span class="string">"topic"</span>,record.topic());</span><br><span class="line">			recordMap.put(<span class="string">"timestamp"</span>,String.valueOf(record.timestamp()));</span><br><span class="line">			recordList.add(recordMap);</span><br><span class="line">		&#125;</span><br><span class="line">		resultMap.put(<span class="string">"result"</span>,recordList);</span><br><span class="line">		kafkaConsumer.close();</span><br><span class="line">		<span class="keyword">return</span> resultMap;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 返回Producer配置</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> Properties <span class="title">getProducerProperties</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">		props.put(<span class="string">"bootstrap.servers"</span>,<span class="keyword">this</span>.bootStrapServers);</span><br><span class="line">		props.put(<span class="string">"key.serializer"</span>,<span class="keyword">this</span>.keySerializer);</span><br><span class="line">		props.put(<span class="string">"value.serializer"</span>,<span class="keyword">this</span>.valueSerializer);</span><br><span class="line">		<span class="keyword">return</span> props;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 返回consumer配置</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> Properties <span class="title">getConsumerProperties</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">		props.put(<span class="string">"bootstrap.servers"</span>,<span class="keyword">this</span>.bootStrapServers);</span><br><span class="line">		props.put(<span class="string">"key.deserializer"</span>,<span class="keyword">this</span>.keyDeserializer);</span><br><span class="line">		props.put(<span class="string">"value.deserializer"</span>,<span class="keyword">this</span>.valueDeserializer);</span><br><span class="line">		props.put(<span class="string">"auto.offset.reset"</span>,<span class="keyword">this</span>.autoOffsetReset);</span><br><span class="line">		<span class="keyword">return</span> props;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"服务启动"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="编写DemoApplication-java"><a href="#编写DemoApplication-java" class="headerlink" title="编写DemoApplication.java"></a>编写DemoApplication.java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRecord;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRecords;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.consumer.KafkaConsumer;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.producer.KafkaProducer;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.producer.ProducerRecord;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.CommandLineRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.EnableAutoConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.kafka.annotation.EnableKafka;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"ALL"</span>)</span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@EnableKafka</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.global.bootstrap.servers&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String bootStrapServers;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.producer.key.serializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String keySerializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.producer.value.serializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String valueSerializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.consumer.key.deserializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String keyDeserializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.consumer.value.deserializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String valueDeserializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.consumer.auto.offset.reset&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String autoOffsetReset;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RequestMapping</span>(value = <span class="string">"/producer/&#123;topics&#125;/&#123;key&#125;/&#123;value&#125;"</span>)</span><br><span class="line">	<span class="meta">@ResponseBody</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> HashMap <span class="title">producer</span><span class="params">(@PathVariable(value = <span class="string">"topics"</span>)</span> String topics,@<span class="title">PathVariable</span><span class="params">(value = <span class="string">"value"</span>)</span> String value,@<span class="title">PathVariable</span><span class="params">(value = <span class="string">"key"</span>)</span> String key) </span>&#123;</span><br><span class="line">		List&lt;String&gt; topicList = Arrays.asList(topics.split(<span class="string">","</span>));</span><br><span class="line">		HashMap resultMap = <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">		Properties producerProperties = getProducerProperties();</span><br><span class="line">		KafkaProducer&lt;String,String&gt; kafkaProducer = <span class="keyword">new</span> KafkaProducer&lt;String,String&gt;(producerProperties);</span><br><span class="line">		<span class="keyword">for</span> (String topic :</span><br><span class="line">				topicList) &#123;</span><br><span class="line">			ProducerRecord&lt;String,String&gt; producerRecord = <span class="keyword">new</span> ProducerRecord&lt;String,String&gt;(topic,key,value);</span><br><span class="line"></span><br><span class="line">			kafkaProducer.send(producerRecord);</span><br><span class="line">		&#125;</span><br><span class="line">		kafkaProducer.close();</span><br><span class="line">		resultMap.put(<span class="string">"topics"</span>,topicList);</span><br><span class="line">		resultMap.put(<span class="string">"value"</span>,value);</span><br><span class="line">		resultMap.put(<span class="string">"key"</span>,key);</span><br><span class="line">		<span class="keyword">return</span> resultMap;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@RequestMapping</span>(value = <span class="string">"/consumer/&#123;topics&#125;/&#123;limit&#125;"</span>)</span><br><span class="line">	<span class="meta">@ResponseBody</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> HashMap <span class="title">consumer</span><span class="params">(@PathVariable(value = <span class="string">"topics"</span>)</span> String topics,@<span class="title">PathVariable</span><span class="params">(<span class="string">"limit"</span>)</span> String limit,@<span class="title">RequestParam</span><span class="params">(value = <span class="string">"group.id"</span>,defaultValue = <span class="string">""</span>,required = <span class="keyword">false</span>)</span> String groupId) </span>&#123;</span><br><span class="line">		List&lt;String&gt; topicList = Arrays.asList(topics.split(<span class="string">","</span>));</span><br><span class="line">		HashMap resultMap = <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">		Properties consumerProperties = getConsumerProperties();</span><br><span class="line">		<span class="keyword">if</span> (groupId.length() == <span class="number">0</span>) &#123;</span><br><span class="line">			consumerProperties.put(<span class="string">"group.id"</span>,UUID.randomUUID().toString());</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			consumerProperties.put(<span class="string">"group.id"</span>,groupId);</span><br><span class="line">		&#125;</span><br><span class="line">		consumerProperties.put(<span class="string">"max.poll.records"</span>,limit);</span><br><span class="line">		KafkaConsumer&lt;String,String&gt; kafkaConsumer  = <span class="keyword">new</span> KafkaConsumer&lt;String,String&gt;(consumerProperties);</span><br><span class="line">		kafkaConsumer.subscribe(topicList);</span><br><span class="line">		ConsumerRecords&lt;String,String&gt; consumerRecords = kafkaConsumer.poll(<span class="number">1000</span>);</span><br><span class="line">		resultMap.put(<span class="string">"topics"</span>,topicList);</span><br><span class="line">		List&lt;Map&gt; recordList = <span class="keyword">new</span> ArrayList&lt;Map&gt;();</span><br><span class="line">		<span class="keyword">for</span> (ConsumerRecord&lt;String, String&gt; record : consumerRecords) &#123;</span><br><span class="line">			HashMap&lt;String,String&gt; recordMap =  <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">			recordMap.put(<span class="string">"key"</span>,record.key());</span><br><span class="line">			recordMap.put(<span class="string">"value"</span>,record.value());</span><br><span class="line">			recordMap.put(<span class="string">"offset"</span>, String.valueOf(record.offset()));</span><br><span class="line">			recordMap.put(<span class="string">"partition"</span>, String.valueOf(record.partition()));</span><br><span class="line">			recordMap.put(<span class="string">"topic"</span>,record.topic());</span><br><span class="line">			recordMap.put(<span class="string">"timestamp"</span>,String.valueOf(record.timestamp()));</span><br><span class="line">			recordList.add(recordMap);</span><br><span class="line">		&#125;</span><br><span class="line">		resultMap.put(<span class="string">"result"</span>,recordList);</span><br><span class="line">		kafkaConsumer.close();</span><br><span class="line">		<span class="keyword">return</span> resultMap;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 返回Producer配置</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> Properties <span class="title">getProducerProperties</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">		props.put(<span class="string">"bootstrap.servers"</span>,<span class="keyword">this</span>.bootStrapServers);</span><br><span class="line">		props.put(<span class="string">"key.serializer"</span>,<span class="keyword">this</span>.keySerializer);</span><br><span class="line">		props.put(<span class="string">"value.serializer"</span>,<span class="keyword">this</span>.valueSerializer);</span><br><span class="line">		<span class="keyword">return</span> props;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 返回consumer配置</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> Properties <span class="title">getConsumerProperties</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">		props.put(<span class="string">"bootstrap.servers"</span>,<span class="keyword">this</span>.bootStrapServers);</span><br><span class="line">		props.put(<span class="string">"key.deserializer"</span>,<span class="keyword">this</span>.keyDeserializer);</span><br><span class="line">		props.put(<span class="string">"value.deserializer"</span>,<span class="keyword">this</span>.valueDeserializer);</span><br><span class="line">		props.put(<span class="string">"auto.offset.reset"</span>,<span class="keyword">this</span>.autoOffsetReset);</span><br><span class="line">		<span class="keyword">return</span> props;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(DemoApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"服务启动"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>###clean &amp;&amp; package &amp;&amp; run<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package &amp;&amp; docker run --name=<span class="string">"spring_boot"</span> --rm --net=docker_default -v <span class="string">"<span class="variable">$PWD</span>/target/http-demo-0.0.1-SNAPSHOT.jar:/app/app.jar"</span> -p <span class="string">'10086:9527'</span> bankmonitor/spring-boot</span><br></pre></td></tr></table></figure></p>
 <p>启动之后我们的接口监听在10086端口</p>
 <h3 id="调用producer接口"><a href="#调用producer接口" class="headerlink" title="调用producer接口"></a>调用producer接口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repeat 1000 <span class="built_in">echo</span>  <span class="string">"curl http://127.0.0.1:10086/producer/foo,bar/"</span>`random protocol`<span class="string">"/"</span>`random ip` | bash</span><br></pre></td></tr></table></figure>
@@ -586,7 +586,7 @@ fair share of the partitions for those topics based on the active consumers in t
     <div id="QR" style="display: none;">
       
         <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/image/pay.jpeg" alt="塔塔拉夏 WeChat Pay"/>
+          <img id="wechat_qr" src="/image/pay.jpeg" alt="塔塔拉夏 WeChat Pay">
           <p>微信打赏</p>
         </div>
       
@@ -603,11 +603,11 @@ fair share of the partitions for those topics based on the active consumers in t
       
         <div class="post-tags">
           
+            <a href="/tags/java/" rel="tag"># java</a>
+          
             <a href="/tags/kafka/" rel="tag"># kafka</a>
           
             <a href="/tags/spring-boot/" rel="tag"># spring-boot</a>
-          
-            <a href="/tags/java/" rel="tag"># java</a>
           
             <a href="/tags/kafka-client/" rel="tag"># kafka-client</a>
           
@@ -634,8 +634,8 @@ fair share of the partitions for those topics based on the active consumers in t
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/16/numbers-data-type/" rel="prev" title="整数数据类型与表示形式">
-                整数数据类型与表示形式 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/16/numbers-data-type/" rel="prev" title="整数数据类型表示形式">
+                整数数据类型表示形式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -665,7 +665,7 @@ fair share of the partitions for those topics based on the active consumers in t
   <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
   <a class="jiathis_counter_style"></a>
 </div>
-<script type="text/javascript" >
+<script type="text/javascript">
   var jiathis_config={
     hideMore:false
   }
@@ -685,8 +685,7 @@ fair share of the partitions for those topics based on the active consumers in t
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/10/kafka-java-client/"
-           data-title="java kafka-client应用与http实现" data-url="http://z-caterpillar.github.io/2017/03/10/kafka-java-client/">
+      <div class="ds-thread" data-thread-key="2017/03/10/kafka-java-client/" data-title="java kafka-client应用与http实现" data-url="http://z-caterpillar.github.io/2017/03/10/kafka-java-client/">
       </div>
     
   </div>
@@ -711,7 +710,7 @@ fair share of the partitions for those topics based on the active consumers in t
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -722,9 +721,7 @@ fair share of the partitions for those topics based on the active consumers in t
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/image/my.png"
-               alt="塔塔拉夏" />
+          <img class="site-author-image" itemprop="image" src="/image/my.png" alt="塔塔拉夏">
           <p class="site-author-name" itemprop="name">塔塔拉夏</p>
            
               <p class="site-description motion-element" itemprop="description">工程师。</p>
@@ -735,7 +732,7 @@ fair share of the partitions for those topics based on the active consumers in t
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -753,7 +750,7 @@ fair share of the partitions for those topics based on the active consumers in t
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -842,10 +839,10 @@ fair share of the partitions for those topics based on the active consumers in t
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

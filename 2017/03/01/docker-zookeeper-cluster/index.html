@@ -6,15 +6,15 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -32,7 +32,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -66,23 +66,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="docker,docker-compose,zookeeper," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="塔塔拉夏的博客" type="application/atom+xml" />
+  <meta name="keywords" content="docker,docker-compose,zookeeper,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+  <link rel="alternate" href="/atom.xml" title="塔塔拉夏的博客" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
 
 
 
@@ -130,7 +130,7 @@
 
 
 
-  <link rel="canonical" href="http://z-caterpillar.github.io/2017/03/01/docker-zookeeper-cluster/"/>
+  <link rel="canonical" href="http://z-caterpillar.github.io/2017/03/01/docker-zookeeper-cluster/">
 
 
 
@@ -170,7 +170,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">塔塔拉夏的博客</span>
         <span class="logo-line-after"><i></i></span>
@@ -200,7 +200,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -210,7 +210,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -220,7 +220,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -230,7 +230,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -240,7 +240,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -250,7 +250,7 @@
         <li class="menu-item menu-item-commonweal">
           <a href="/404.html" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
             
             公益404
           </a>
@@ -263,7 +263,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
             
             搜索
           </a>
@@ -321,7 +321,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="塔塔拉夏">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/image/my.png">
     </span>
 
@@ -364,7 +364,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -432,7 +432,7 @@
 <li>fify/node-zk-browser:latest 镜像</li>
 <li>zookeeper:latest 镜像</li>
 </ul>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="编辑zookeeper-yml配置文件"><a href="#编辑zookeeper-yml配置文件" class="headerlink" title="编辑zookeeper.yml配置文件"></a>编辑zookeeper.yml配置文件</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'2'</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line"><span class="attr">  zookeeper_network:</span></span><br><span class="line"><span class="attr">      driver:</span> <span class="string">bridge</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  zoo1:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="attr">zookeeper:latest</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">zoo1</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"21811:2181"</span></span><br><span class="line"><span class="attr">    expose:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"2888"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"3888"</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo1/data:/data:rw"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo1/datalog:/datalog:rw"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo1/conf:/conf:rw"</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      ZOO_MY_ID:</span> <span class="number">1</span></span><br><span class="line"><span class="attr">      ZOO_SERVERS:</span> <span class="string">server.1=zoo1:2888:3888</span> <span class="string">server.2=zoo2:2888:3888</span> <span class="string">server.3=zoo3:2888:3888</span></span><br><span class="line"><span class="attr">  zoo2:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="attr">zookeeper:latest</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">zoo2</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"21812:2181"</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></span><br><span class="line"><span class="attr">    expose:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"2888"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"3888"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo2/data:/data:rw"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo2/datalog:/datalog:rw"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo2/conf:/conf:rw"</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      ZOO_MY_ID:</span> <span class="number">2</span></span><br><span class="line"><span class="attr">      ZOO_SERVERS:</span> <span class="string">server.1=zoo1:2888:3888</span> <span class="string">server.2=zoo2:2888:3888</span> <span class="string">server.3=zoo3:2888:3888</span></span><br><span class="line"><span class="attr">  zoo3:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="attr">zookeeper:latest</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">zoo3</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"21813:2181"</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></span><br><span class="line"><span class="attr">    expose:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"2888"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"3888"</span></span><br><span class="line"><span class="attr">    volumes:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo3/data:/data:rw"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo3/datalog:/datalog:rw"</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"./storge/zoo3/conf:/conf:rw"</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      ZOO_MY_ID:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">      ZOO_SERVERS:</span> <span class="string">server.1=zoo1:2888:3888</span> <span class="string">server.2=zoo2:2888:3888</span> <span class="string">server.3=zoo3:2888:3888</span></span><br><span class="line"><span class="attr">  zk-manager:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">fify/node-zk-browser:latest</span></span><br><span class="line"><span class="attr">    container_name:</span> <span class="string">zk-manager</span></span><br><span class="line"><span class="attr">    restart:</span> <span class="string">always</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zoo1</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zoo2</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">zoo3</span></span><br><span class="line"><span class="attr">    ports:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"3000:3000"</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"zookeeper_network"</span></span><br><span class="line"><span class="attr">    expose:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">"3000"</span></span><br><span class="line"><span class="attr">    environment:</span></span><br><span class="line"><span class="attr">      ZK_HOST:</span> <span class="attr">zoo1:2181,zoo2:2181,zoo3:2181</span></span><br></pre></td></tr></table></figure>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="编辑zookeeper-yml配置文件"><a href="#编辑zookeeper-yml配置文件" class="headerlink" title="编辑zookeeper.yml配置文件"></a>编辑zookeeper.yml配置文件</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'2'</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">zookeeper_network:</span></span><br><span class="line">      <span class="attr">driver:</span> <span class="string">bridge</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">zoo1:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">zookeeper:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">zoo1</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"21811:2181"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"2888"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"3888"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"zookeeper_network"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo1/data:/data:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo1/datalog:/datalog:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo1/conf:/conf:rw"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">ZOO_MY_ID:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">ZOO_SERVERS:</span> <span class="string">server.1=zoo1:2888:3888</span> <span class="string">server.2=zoo2:2888:3888</span> <span class="string">server.3=zoo3:2888:3888</span></span><br><span class="line">  <span class="attr">zoo2:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">zookeeper:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">zoo2</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"21812:2181"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"zookeeper_network"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"2888"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"3888"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo2/data:/data:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo2/datalog:/datalog:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo2/conf:/conf:rw"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">ZOO_MY_ID:</span> <span class="number">2</span></span><br><span class="line">      <span class="attr">ZOO_SERVERS:</span> <span class="string">server.1=zoo1:2888:3888</span> <span class="string">server.2=zoo2:2888:3888</span> <span class="string">server.3=zoo3:2888:3888</span></span><br><span class="line">  <span class="attr">zoo3:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">zookeeper:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">zoo3</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"21813:2181"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"zookeeper_network"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"2888"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"3888"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo3/data:/data:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo3/datalog:/datalog:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo3/conf:/conf:rw"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">ZOO_MY_ID:</span> <span class="number">3</span></span><br><span class="line">      <span class="attr">ZOO_SERVERS:</span> <span class="string">server.1=zoo1:2888:3888</span> <span class="string">server.2=zoo2:2888:3888</span> <span class="string">server.3=zoo3:2888:3888</span></span><br><span class="line">  <span class="attr">zk-manager:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">fify/node-zk-browser:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">zk-manager</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">zoo1</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">zoo2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">zoo3</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"3000:3000"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"zookeeper_network"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"3000"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">ZK_HOST:</span> <span class="string">zoo1:2181,zoo2:2181,zoo3:2181</span></span><br></pre></td></tr></table></figure>
 <h3 id="运行服务"><a href="#运行服务" class="headerlink" title="运行服务"></a>运行服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">➜  docker docker-compose -f zookeeper.yml up --remove -d</span><br><span class="line">Starting zoo3</span><br><span class="line">Starting zoo2</span><br><span class="line">Starting zoo1</span><br><span class="line">Starting zk-manager</span><br><span class="line">➜  docker docker-compose  -f zookeeper.yml ps</span><br><span class="line">   Name                 Command               State                      Ports</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">zk-manager   /opt/node-zk-browser/start.sh    Up      0.0.0.0:3000-&gt;3000/tcp</span><br><span class="line">zoo1         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21811-&gt;2181/tcp, 2888/tcp, 3888/tcp</span><br><span class="line">zoo2         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21812-&gt;2181/tcp, 2888/tcp, 3888/tcp</span><br><span class="line">zoo3         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21813-&gt;2181/tcp, 2888/tcp, 3888/tcp</span><br></pre></td></tr></table></figure>
 <h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><p>通过zkCli访问:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  docker zkCli -server 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</span><br><span class="line">Connecting to 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</span><br><span class="line">Welcome to ZooKeeper!</span><br><span class="line">JLine support is enabled</span><br><span class="line"></span><br><span class="line">WATCHER::</span><br><span class="line"></span><br><span class="line">WatchedEvent state:SyncConnected <span class="built_in">type</span>:None path:null</span><br><span class="line">[zk: 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813(CONNECTED) 0]</span><br></pre></td></tr></table></figure>
@@ -470,7 +470,7 @@
     <div id="QR" style="display: none;">
       
         <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/image/pay.jpeg" alt="塔塔拉夏 WeChat Pay"/>
+          <img id="wechat_qr" src="/image/pay.jpeg" alt="塔塔拉夏 WeChat Pay">
           <p>微信打赏</p>
         </div>
       
@@ -541,7 +541,7 @@
   <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
   <a class="jiathis_counter_style"></a>
 </div>
-<script type="text/javascript" >
+<script type="text/javascript">
   var jiathis_config={
     hideMore:false
   }
@@ -561,8 +561,7 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/01/docker-zookeeper-cluster/"
-           data-title="使用docker创建zookeeper集群" data-url="http://z-caterpillar.github.io/2017/03/01/docker-zookeeper-cluster/">
+      <div class="ds-thread" data-thread-key="2017/03/01/docker-zookeeper-cluster/" data-title="使用docker创建zookeeper集群" data-url="http://z-caterpillar.github.io/2017/03/01/docker-zookeeper-cluster/">
       </div>
     
   </div>
@@ -587,7 +586,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -598,9 +597,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/image/my.png"
-               alt="塔塔拉夏" />
+          <img class="site-author-image" itemprop="image" src="/image/my.png" alt="塔塔拉夏">
           <p class="site-author-name" itemprop="name">塔塔拉夏</p>
            
               <p class="site-description motion-element" itemprop="description">工程师。</p>
@@ -611,7 +608,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -629,7 +626,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -718,10 +715,10 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

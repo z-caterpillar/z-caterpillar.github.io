@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://z-caterpillar.github.io/"/>
-  <updated>2018-08-17T09:01:14.034Z</updated>
+  <updated>2018-08-22T09:45:33.499Z</updated>
   <id>http://z-caterpillar.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>整数数据类型与表示形式</title>
+    <title>进制转换</title>
+    <link href="http://z-caterpillar.github.io/2018/08/22/conversion-of-number/"/>
+    <id>http://z-caterpillar.github.io/2018/08/22/conversion-of-number/</id>
+    <published>2018-08-22T08:25:07.000Z</published>
+    <updated>2018-08-22T09:45:33.499Z</updated>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;二进制,十进制,八进制,十六进制转换关系;基础中的基础&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://z-caterpillar.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="java" scheme="http://z-caterpillar.github.io/tags/java/"/>
+    
+      <category term="基础" scheme="http://z-caterpillar.github.io/tags/%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>整数数据类型表示形式</title>
     <link href="http://z-caterpillar.github.io/2018/08/16/numbers-data-type/"/>
     <id>http://z-caterpillar.github.io/2018/08/16/numbers-data-type/</id>
     <published>2018-08-16T06:26:18.000Z</published>
-    <updated>2018-08-17T09:01:14.034Z</updated>
+    <updated>2019-11-11T09:48:47.178Z</updated>
     
     <summary type="html">
     
@@ -59,11 +82,11 @@
       <category term="技术" scheme="http://z-caterpillar.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
+      <category term="java" scheme="http://z-caterpillar.github.io/tags/java/"/>
+    
       <category term="kafka" scheme="http://z-caterpillar.github.io/tags/kafka/"/>
     
       <category term="spring-boot" scheme="http://z-caterpillar.github.io/tags/spring-boot/"/>
-    
-      <category term="java" scheme="http://z-caterpillar.github.io/tags/java/"/>
     
       <category term="kafka-client" scheme="http://z-caterpillar.github.io/tags/kafka-client/"/>
     
@@ -89,11 +112,11 @@
       <category term="技术" scheme="http://z-caterpillar.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
+      <category term="java" scheme="http://z-caterpillar.github.io/tags/java/"/>
+    
       <category term="docker" scheme="http://z-caterpillar.github.io/tags/docker/"/>
     
       <category term="spring-boot" scheme="http://z-caterpillar.github.io/tags/spring-boot/"/>
-    
-      <category term="java" scheme="http://z-caterpillar.github.io/tags/java/"/>
     
   </entry>
   

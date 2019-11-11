@@ -1,9 +1,372 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[整数数据类型与表示形式]]></title>
-    <url>%2F2018%2F08%2F16%2Fnumbers-data-type%2F</url>
-    <content type="text"><![CDATA[Java数值型数据类型简单介绍；数值的二进制表示方式以及运算原理； 数值类型基本介绍 很简单，随便列个表 类型 占用空间 最大值 最小值 字面量标识 byte 8位 Byte.MIN_VALUE Byte.MAX_VALUE short 16位 Short.MIN_VALUE Short.MAX_VALUE int 32位 Integer.MIN_VALUE Integer.MAX_VALUE (整形默认) long 64位 Long.MIN_VALUE Long.MAX_VALUE L 整数的二进制表示方式 整数的二进制表示方式一般用于表示带符号整数,通常有原码，反码，补码三种表示方式，计算机选择补码方式表示。 编码方式 编码方式 最大值 最小值 0 原码 1/0位二进制 01111111:127 11111111:-127 0000000010000000 反码 负数:原码取反正数:原码 01111111:127 10000000:-127 0000000011111111 补码 负数:原码取反+1正数:原码 01111111:127 后面讲 0000000000000000 原码与补码存在的问题： 原码：无法计算负数 比如 (原)10000001(-1) + (原)10000010(-2) = (原)00000011(3) 反码：无法计算正数加负数 比如 (反)11111110(-1) + (反)00000010(2) = (反)00000000(0) 补码的最小值为10000000:-128可以理解为一种特殊性，原因简单分析一下: 三种编码方案都采用首位作为符号位，所以剩下的位数共有(2**7)2=256种组合，也就是模为256，理论上可以标示256的数字。 原码和反码(-127~+127)范围只有255个数字，因为0占掉了2个位置。 补码0只占一个位置,所以选用一个极为特殊的(补)10000000作为-128。 这个补码很特殊，他们原码和补码是一样。 总结下补码的特性： 补码的补码等于源码 补码0只有一种表示形式 补码的范围与数学意义上的模相同。 整数类型的运算 加减法不说，这两个运算比较简单。 乘法与除法的基本原则：把除法转成乘法，乘法转成加法，减法也转成加法。 位运算：直接对整型的二进制位进行操作。 与（&amp;）：都为1则为1，否则0 清零，或者部分位清零，比如：10101010 &amp; 00001111 = 00001010，此为前4位清零 或 (|）：只要有一个为1则为1，否则0 置一，或者部分位置一，比如：10101010 | 00001111 = 10101111，此为后4位置一 异或（^）：相同为0，不同为1 取得原值，与0异或得原址，比如：10101010 ^ 00000000 = 1010101 取反，与1异或取反，比如：10101010 ^ 11111111 = 01010101 非（～）：取反 位移操作： 左移（&lt;&lt;）：正数负数采用同样的方式，左移指定位数(超出范围取模)，高位抛弃，低位补0 比如：00000101(5) &lt;&lt; 1 = 00001010(10);00000101(5) &lt;&lt; 2 = 00010100(20) 如果字长为8位，则 &lt;&lt; 1 与 &lt;&lt; 9 相同。 左移是乘2，公式 y = x * (2**位数），左移1位相当于乘2，左移2位相当于乘4 带符号右移（&gt;&gt;）：右移动指定位数，高位补符号位，低位抛弃 比如：00000111(7) &gt;&gt; 1 = 00000011(3); 00000111(7) &gt;&gt; 2 = 00000001(1) 右移是除2取商，公式 y = 商(x / (2**位数)) 无符号右移（&gt;&gt;&gt;）：右移动指定位数，高位补0，低位抛弃 乘法操作-累加被乘数： 上一部分内容我们知道左移动相当于乘2,也相当于与自己相加。但是无法进行*3操作 假设我们要处理x7,则x7 = x ((22) + (21) + (2**0)) = x(22) + x*(21) + x*(2**0) = x&lt;&lt;2 + x&lt;&lt;1 + x&lt;&lt;0 除法操作-累减除数直到结果&lt;被除数： 上一部分内容我们知道左移动相当于除2取商,也相当于与自己相加。但是无法进行/3操作 todo]]></content>
+    <title>进制转换</title>
+    <url>/2018/08/22/conversion-of-number/</url>
+    <content><![CDATA[<blockquote>
+<p>二进制,十进制,八进制,十六进制转换关系;基础中的基础<br><a id="more"></a></p>
+</blockquote>
+<h3 id="十进制转二进制"><a href="#十进制转二进制" class="headerlink" title="十进制转二进制"></a>十进制转二进制</h3><h4 id="整数部分转二进制"><a href="#整数部分转二进制" class="headerlink" title="整数部分转二进制"></a>整数部分转二进制</h4><ul>
+<li>除2取余法</li>
+<li>说明：整数部分除以2,取余数,商继续除以2,直到商为0,排列余数即为二进制</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">计算</th>
+<th style="text-align:left">商</th>
+<th style="text-align:left">余数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">9 % 2</td>
+<td style="text-align:left">4</td>
+<td style="text-align:left">1</td>
+</tr>
+<tr>
+<td style="text-align:left">4 % 2</td>
+<td style="text-align:left">2</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">2 % 2</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">1 % 2</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>9(十进制) = 1001(二进制)</li>
+</ul>
+<h4 id="小数部分转二进制"><a href="#小数部分转二进制" class="headerlink" title="小数部分转二进制"></a>小数部分转二进制</h4><ul>
+<li>乘2取整法</li>
+<li>说明：小数部分乘以2,取整数，小数部分继续乘以2,直到小数部分为0,排列整数即为二进制</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">计算</th>
+<th style="text-align:left">整数</th>
+<th style="text-align:left">小数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0.9 * 2</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0.8</td>
+</tr>
+<tr>
+<td style="text-align:left">0.8 * 2</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0.6</td>
+</tr>
+<tr>
+<td style="text-align:left">0.6 * 2</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0.2</td>
+</tr>
+<tr>
+<td style="text-align:left">0.2 * 2</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0.4</td>
+</tr>
+<tr>
+<td style="text-align:left">0.4 * 2</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0.8</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>1100开始无限循环：0.9(十进制) = 0.1(1100)(二进制）</li>
+</ul>
+<h3 id="二进制转十进制"><a href="#二进制转十进制" class="headerlink" title="二进制转十进制"></a>二进制转十进制</h3><ul>
+<li>二进制数非零位取2的索引位次幂累加,整数部分与小数部分分别累加</li>
+<li>比如二进制数1001.1110<br>| 二进制位 | 索引位 | 值|<br>| :————- | :————- |:————- |<br>| 1 | 3 | 2^3=8 |<br>| 0 | 2 | 位0不取 |<br>| 0 | 1 | 位0不取 |<br>| 1 | 0  | 2^0=1 |<br>| 1 | -1 | 2^-1=0.5  |<br>| 1 | -2 | 2^-2=0.25  |<br>| 1 | -3 | 2^-3=0.125   |<br>| 0 | -4 | 位0不取   |</li>
+<li>整数部分8+1=9,小数部分0.5+0.25+0.125 = 0.875 结果为9.875<h3 id="二进制-八进制"><a href="#二进制-八进制" class="headerlink" title="二进制,八进制"></a>二进制,八进制</h3></li>
+</ul>
+]]></content>
+      <categories>
+        <category>技术</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>基础</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>整数数据类型表示形式</title>
+    <url>/2018/08/16/numbers-data-type/</url>
+    <content><![CDATA[<blockquote>
+<p>Java数值型数据类型简单介绍；<br>数值的二进制表示方式以及运算原理；<br><a id="more"></a></p>
+</blockquote>
+<h3 id="数值类型基本介绍"><a href="#数值类型基本介绍" class="headerlink" title="数值类型基本介绍"></a>数值类型基本介绍</h3><ul>
+<li>很简单，随便列个表</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>占用空间</th>
+<th>最大值</th>
+<th>最小值</th>
+<th>字面量标识</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byte</td>
+<td>8位</td>
+<td>Byte.MIN_VALUE</td>
+<td>Byte.MAX_VALUE</td>
+<td></td>
+</tr>
+<tr>
+<td>short</td>
+<td>16位</td>
+<td>Short.MIN_VALUE</td>
+<td>Short.MAX_VALUE</td>
+<td></td>
+</tr>
+<tr>
+<td>int</td>
+<td>32位</td>
+<td>Integer.MIN_VALUE</td>
+<td>Integer.MAX_VALUE</td>
+<td>(整形默认)</td>
+</tr>
+<tr>
+<td>long</td>
+<td>64位</td>
+<td>Long.MIN_VALUE</td>
+<td>Long.MAX_VALUE</td>
+<td>L</td>
+</tr>
+</tbody>
+</table>
+<h3 id="整数的二进制表示方式"><a href="#整数的二进制表示方式" class="headerlink" title="整数的二进制表示方式"></a>整数的二进制表示方式</h3><ul>
+<li>整数的二进制表示方式<br>一般用于表示带符号整数,通常有原码，反码，补码三种表示方式，计算机选择补码方式表示。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>编码方式</th>
+<th>编码方式</th>
+<th>最大值</th>
+<th>最小值</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原码</td>
+<td><a href="n-1">1/0</a>位二进制</td>
+<td>01111111:127</td>
+<td>11111111:-127</td>
+<td>00000000<br>10000000</td>
+</tr>
+<tr>
+<td>反码</td>
+<td>负数:符号位不变原码取反<br>正数:原码</td>
+<td>01111111:127</td>
+<td>10000000:-127</td>
+<td>00000000<br>11111111</td>
+</tr>
+<tr>
+<td>补码</td>
+<td>负数:符号位不变原码取反+1<br>正数:原码</td>
+<td>01111111:127</td>
+<td>后面讲</td>
+<td>00000000<br>00000000</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>原码与补码存在的问题：<ul>
+<li>原码：无法计算负数 比如 (原)10000001(-1) + (原)10000010(-2) = (原)00000011(3)</li>
+<li>反码：无法计算正数加负数 比如 (反)11111110(-1) + (反)00000010(2) = (反)10000000(0)</li>
+<li>根本原因：符号位参与运算导致错误,如果符号位不参与运算那就都是正数加法了</li>
+</ul>
+</li>
+<li>补码的最小值为10000000:-128可以理解为一种特殊性，原因简单分析一下:<ul>
+<li>三种编码方案都采用首位作为符号位，所以剩下的位数共有(2**7)2=256种组合，也就是模为256，理论上可以标示256的数字。</li>
+<li>原码和反码(-127~+127)范围只有255个数字，因为0占掉了2个位置。</li>
+<li>补码0只占一个位置,所以选用一个极为特殊的(补)10000000作为-128。 这个补码很特殊，他们原码和补码是一样。</li>
+</ul>
+</li>
+<li>计算机为什么选择补码作为表示形式：<ul>
+<li>补码+0与-0相同,范围多一位.</li>
+<li>补码可以把减法转为加法2(补)-2(补) = 2(补)+(-2)(补), 2(补)-(-2)(补) = 2(补) + 2(补)</li>
+<li>补码的补码等于原码.</li>
+<li>符号位可参与运算.</li>
+</ul>
+</li>
+</ul>
+<h3 id="处理器操作"><a href="#处理器操作" class="headerlink" title="处理器操作"></a>处理器操作</h3><p>  cpu是一个物理电路系统,基本电路只能进行以下几种操作,并且寄存器有数量限制,寄存器的大小有位数限制。</p>
+<ul>
+<li>位运算：直接对整型的二进制位进行操作。<ul>
+<li>与（&amp;）：都为1则为1，否则0<ul>
+<li>清零，或者部分位清零，比如：10101010 &amp; 00001111 = 00001010，此为前4位清零</li>
+</ul>
+</li>
+<li>或 (|）：只要有一个为1则为1，否则0<ul>
+<li>置一，或者部分位置一，比如：10101010 | 00001111 = 10101111，此为后4位置一</li>
+</ul>
+</li>
+<li>异或（⊕）：相同为0，不同为1<ul>
+<li>取得原值，与0异或得原址，比如：10101010 ^ 00000000 = 10101010</li>
+<li>取反，与1异或取反，比如：10101010 ^ 11111111 = 01010101</li>
+</ul>
+</li>
+<li>非（～）：取反</li>
+</ul>
+</li>
+<li>位移操作（一般来讲我们都是在说算术位移,这里我们用负数补码来举例）：<ul>
+<li>算术左移（&lt;&lt;）：正数负数采用同样的方式，左移指定位数取模字长，高位抛弃，低位补0<ul>
+<li>比如：11111011(-5)(补) &lt;&lt; 1%8 = 11110110(-10)(补);11111011(-5)(补) &lt;&lt; 2%8 = 11101100(20)(补)</li>
+<li>如果字长为8位,则 &lt;&lt; 1%8 与 &lt;&lt; 9%8 相同。</li>
+<li>左移是增倍。</li>
+</ul>
+</li>
+<li>算术右移（&gt;&gt;）：右移动指定位数，高位补符号位，低位抛弃<ul>
+<li>比如：00000111(7)(补) &gt;&gt; 1 = 00000011(3)(补); 00000111(7)(补) &gt;&gt; 2 = 00000001(1)(补)</li>
+<li>右移是减半。</li>
+</ul>
+</li>
+<li>逻辑左移 (&lt;&lt;) ：与算术右移相同</li>
+<li>逻辑右移（&gt;&gt;&gt;）：右移动指定位数，高位补0，低位抛弃，基本没用。</li>
+<li>问题：如果负数左移导致符号为0或者正数左移符号为1会如何？<ul>
+<li>比如：10001000(-120)(补) &lt;&lt; 1 = 00010000(112)(补)</li>
+<li>很奇怪是不是,但是120的绝对值已经大于128/2,左移必然溢出。</li>
+<li>所以,支持左移的二进制数,必须是最高位与符号位相同,不然一定会溢出。</li>
+</ul>
+</li>
+<li>总结：<ul>
+<li>逻辑位移针对无符号数增倍或减半。</li>
+<li>算术位移针对有符号数增倍或减半。</li>
+<li>左移的最高位与符号位一定要相同,不然溢出。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="整数类型的运算"><a href="#整数类型的运算" class="headerlink" title="整数类型的运算"></a>整数类型的运算</h3><p>  cpu使用简单的位运算进行各种复杂的运算</p>
+<ul>
+<li>加法<ul>
+<li>分析每一位做加法的几种情况-小学数学(^^!)</li>
+<li>任何一个位相加都是只有这四种可能情况。</li>
+<li>总结一下规律：结果 = 加数 | 被加数, 进位 =  加数 &amp; 被加数</li>
+<li>这样使用一个与门和一个非门就可以完成一个加法器</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">加数</th>
+<th style="text-align:left">被加数</th>
+<th style="text-align:left">结果</th>
+<th style="text-align:left">进位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0</td>
+<td style="text-align:left">1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>减法<ul>
+<li>与加法相同,加法器再加一个补码转换器即可。</li>
+</ul>
+</li>
+<li>乘法<ul>
+<li>基本原理为将乘法转为加法</li>
+<li>比如 00001010(10)(补) x 00000101(5)(补) = （00000001(1)(补) + 00000100(4)(补)）x 00001010(10)(补) = 00000001(1)(补) x 00001010(10)(补) + 00000100(4)(补) x 00001010(10)(补)</li>
+<li>最后的等于可以理解为00001010(10)(补) &lt;&lt; 1%8 + 00001010(10)(补) &lt;&lt; 4%8</li>
+<li>这样乘法就被转为加法与位移操作。</li>
+<li>计算机具体操作方式如下</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">被乘数</th>
+<th style="text-align:left">乘数</th>
+<th style="text-align:left">部分积</th>
+<th style="text-align:left">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">00001010(10)</td>
+<td style="text-align:left">00000101(5)</td>
+<td style="text-align:left">00000000(0)</td>
+<td style="text-align:left">初始化</td>
+</tr>
+<tr>
+<td style="text-align:left">00001010(10)</td>
+<td style="text-align:left">00000101(5)</td>
+<td style="text-align:left">00000000(0) + 00001010(10) = 00001010(10)</td>
+<td style="text-align:left">判断乘数最低位为1,则部分积+=被乘数</td>
+</tr>
+<tr>
+<td style="text-align:left">00001010(10)</td>
+<td style="text-align:left">00000010(4)</td>
+<td style="text-align:left">00000101(5)</td>
+<td style="text-align:left">部分积算术右移1位。低位溢出到乘数最高位，乘数最低位溢出丢弃,</td>
+</tr>
+<tr>
+<td style="text-align:left">00001010(10)</td>
+<td style="text-align:left">00000010(4)</td>
+<td style="text-align:left">00000101(5)</td>
+<td style="text-align:left">判断乘数最低位为0,继续</td>
+</tr>
+</tbody>
+</table>
+<p>  与除法的基本原则：把除法转成乘法，乘法转成加法，减法也转成加法。</p>
+<ul>
+<li>乘法操作-累加被乘数：<ul>
+<li>上一部分内容我们知道左移动相当于乘2,也相当于与自己相加。但是无法进行*3操作</li>
+<li>假设我们要处理x<em>7,则x</em>7 = x <em> ((2<strong>2) + (2</strong>1) + (2**0)) = x</em>(2<strong>2) + x*(2</strong>1) + x*(2**0) = x&lt;&lt;2 + x&lt;&lt;1 + x&lt;&lt;0</li>
+</ul>
+</li>
+<li>除法操作-累减除数直到结果&lt;被除数：<ul>
+<li>上一部分内容我们知道左移动相当于除2取商,也相当于与自己相加。但是无法进行/3操作</li>
+<li>todo</li>
+</ul>
+</li>
+</ul>
+]]></content>
       <categories>
         <category>技术</category>
       </categories>
@@ -14,37 +377,279 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[java kafka-client应用与http实现]]></title>
-    <url>%2F2017%2F03%2F10%2Fkafka-java-client%2F</url>
-    <content type="text"><![CDATA[使用kafka-client实现producer api与consumer api,并且提供简单的http接口 大多数情况下,我们使用kafka-connect来做kafka集群数据的收集与导出,使用kafka-steams api来做流式处理。在这之前我们先来了解一下java kafka client。kafka不是一个有序的消息队列,kafka不是一个有序的消息队列,kafka不是一个有序的消息队列,重要的事情说三遍。(￣▽￣;) producerkafka producer主要负责负载均衡和异步发送,大致的过程如下: producer连接至kafka之后,会获取kafka集群中的partitions信息保存在KafkaProducer的MetaData中并定时刷新,如下表: topic partitions broker type foo 0 1001 leader foo 1 1002 replication bar 49 1003 leader bar 50 1002 repilcation ProducerRecorder代表每条消息,包含四部分信息(key,value,topic,partitions,timestamp) 根据ProducerRecorder提供的topic,partitions信息,KafkaProducer可以定位到一个leader broker,KafkaProducer与leader broker建立连接,通过Future异步发送ProducerRecorder至leader broker,保存key,value信息到指定的partitions。 producer的负载均衡策略都是在客户端实现,ProducerRecorder类4个初始化参数非常重要,特别是partitions,该参数决定了负载如何分布。为了解决这个问题kafka-client提供了两种默认的partitions策略 如果key为null,则轮询partitions,保证负载尽量均匀,但是ProducerRecorder仅在单个partitions中有序 (￣▽￣;). 如果key存在,则将key通过hash算法确定一个partitions(此部分可自定义,实现Partitioner接口即可),此种方式负载并不均衡,但是因为相同的key会存在同一个partitions中,所以相同的key是有序的。 推荐第二种方式,实际项目中kafka大多存储一些数据信息,比如用户行为,网站日志,监控信息,这些都是可以定义key的,可以将user_id,session ID,appID, IP,作为key.当我们需要一个有序队列提供给consumer时,可以通过stream api将按key过滤,流化到另外一个只有一个partitions的topic中。 consumerkafka consumer 需要注意的几个地方 consumer从topic pull数据,注意!! 是拉数据,并不是服务端push过来的. consumer pull数据的时候,需要指定partitions,如果不指定partitions,并且topic有多个partitions,那么拉取数据所选择的partitions是随机的,随机的,随机的(￣▽￣;). 如果多个consumer指定同一个group.id,那么pull数据的时候,单个consumer与partitions绑定,也就是说如果同一个group.id的consumer数量大于partitions数量是没有意义的,超出partitions数量的consumer线程得不到任何数据. 同一个group.id共享partitions的offset信息,多线程情况下请手动更新 (￣▽￣;); consumer详细的过程如下: consumer连接至kafka之后,会获取kafka集群中的partitions信息保存在KafkaConsumer的MetaData中并定时刷新.此部分与producer相同. KafkaConsumer在subscribe会为每个topic维护类似下表的信息,logSize为partitions大小,offset为该group.id的目前的位置,lag为还剩下多少条数据。 Partition LogSize Consumer Offset lag 0 100 1 99 1 100 99 1 2 100 23 77 3 100 7 93 KafkaConsumer在pull时会根据subscribe信息定位到一个leader broker并建立连接,然后pull数据返回ConsumerRecord,pull的开始位置由上表的offset决定。pull完成之后,更新上表中的OffSet与lag信息(多线程情况下请手动commit)。 ConsumerRecord包含topic,key,value,timestamp,offset,partitions等信息。 consumer在pull多个partitions的究竟是先从哪个partitions pull数据?,这个问题kafka-client提供两种策略: 动态指定: assign a fair share of the partitions for those topics based on the active consumers in the group这个官方的说法,公平的选择partions,但是我没看到源码(￣▽￣;),测试来看貌似随机的. 手动指定:此种方式通过org.apache.kafka.clients.consumer.KafkaConsumer#assign方法实现,可以手动指定Paritions 推荐选择第一种方式,至于消息顺序问题,可以使用kafka stream api 解决。 为kafka集群搭建http接口kafka集群只有官方提供的java版本功能较为全面,其它语言有些是社区版本功能不完善,还有一些语言根本就没有client实现,比如php.此时对非java语言提供http接口访问kafka是最方便的,下面我们使用spring-boot来实现producer和consumer的http接口 原料 Docker version 1.13.0 docker-compose version 1.10.0 zookeeper 集群 搭建方式见&lt;使用docker创建zookeeper集群&gt; kafka 集群 搭建方式见&lt;使用docker创建kafka集群&gt; spring-boot 使用方式见&lt;spring-boot微框架创建java docker应用&gt; kafka-clients 0.10.1.1 接口设计设计接口的时候我们屏蔽了一些客户端不需要特别关注的细节,把这些细节处理放在http接口里面处理。 producer接口 GET /producer/{topics}/{key}/{value} RETURN {“topics”:topicList,”key”:key,”value”:value} 说明: producer客户端只需要关心{topics}{key}{value}即可,{topics}可以为多个topic,,分割。 consumer接口 GET /consumer/{topics}/{limit} RETURN {“result”,ConsumerRecordList,”topics”:topicList} 说明: consumer只需要提供{topics}{limit}即可,表明从那个topic取多少条数据,{topics}可以为多个topic,,分割。auto.offset.reset我们默认使用earliest取最早的数据,每次请求单独创建一个group.id(UUID) 创建spring boot项目1spring init 修改pom.xml添加依赖12345678910111213141516171819&lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;&lt;/dependency&gt;&lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt; &lt;scope&gt;test&lt;/scope&gt;&lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt; &lt;/dependency&gt;&lt;dependency&gt; &lt;groupId&gt;org.springframework.kafka&lt;/groupId&gt; &lt;artifactId&gt;spring-kafka&lt;/artifactId&gt; &lt;version&gt;1.1.2.RELEASE&lt;/version&gt;&lt;/dependency&gt; 说明：spring-kafka包含kafka-client 修改application.properties1234567891011#serverserver.port=9527#kafkakafka.global.bootstrap.servers=kafka1:9092,kafka2:9092,kafka3:9092kafka.producer.key.serializer=org.apache.kafka.common.serialization.StringSerializerkafka.producer.value.serializer=org.apache.kafka.common.serialization.StringSerializerkafka.producer.kakfa.global.compression.type=org.apache.kafka.common.serialization.StringSerializerkafka.consumer.key.deserializer=org.apache.kafka.common.serialization.StringDeserializerkafka.consumer.value.deserializer=org.apache.kafka.common.serialization.StringDeserializerkafka.consumer.auto.offset.reset=earliest 编写DemoApplication.java123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123package com.example;import org.apache.kafka.clients.consumer.ConsumerRecord;import org.apache.kafka.clients.consumer.ConsumerRecords;import org.apache.kafka.clients.consumer.KafkaConsumer;import org.apache.kafka.clients.producer.KafkaProducer;import org.apache.kafka.clients.producer.ProducerRecord;import org.springframework.beans.factory.annotation.Value;import org.springframework.boot.CommandLineRunner;import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.EnableAutoConfiguration;import org.springframework.boot.autoconfigure.SpringBootApplication;import org.springframework.kafka.annotation.EnableKafka;import org.springframework.web.bind.annotation.*;import java.util.*;@SuppressWarnings("ALL")@SpringBootApplication@EnableAutoConfiguration@RestController@EnableKafkapublic class DemoApplication implements CommandLineRunner &#123; @Value("$&#123;kafka.global.bootstrap.servers&#125;") private String bootStrapServers; @Value("$&#123;kafka.producer.key.serializer&#125;") private String keySerializer; @Value("$&#123;kafka.producer.value.serializer&#125;") private String valueSerializer; @Value("$&#123;kafka.consumer.key.deserializer&#125;") private String keyDeserializer; @Value("$&#123;kafka.consumer.value.deserializer&#125;") private String valueDeserializer; @Value("$&#123;kafka.consumer.auto.offset.reset&#125;") private String autoOffsetReset; @RequestMapping(value = "/producer/&#123;topics&#125;/&#123;key&#125;/&#123;value&#125;") @ResponseBody public HashMap producer(@PathVariable(value = "topics") String topics,@PathVariable(value = "value") String value,@PathVariable(value = "key") String key) &#123; List&lt;String&gt; topicList = Arrays.asList(topics.split(",")); HashMap resultMap = new HashMap&lt;String,Object&gt;(); Properties producerProperties = getProducerProperties(); KafkaProducer&lt;String,String&gt; kafkaProducer = new KafkaProducer&lt;String,String&gt;(producerProperties); for (String topic : topicList) &#123; ProducerRecord&lt;String,String&gt; producerRecord = new ProducerRecord&lt;String,String&gt;(topic,key,value); kafkaProducer.send(producerRecord); &#125; kafkaProducer.close(); resultMap.put("topics",topicList); resultMap.put("value",value); resultMap.put("key",key); return resultMap; &#125; @RequestMapping(value = "/consumer/&#123;topics&#125;/&#123;limit&#125;") @ResponseBody public HashMap consumer(@PathVariable(value = "topics") String topics,@PathVariable("limit") String limit,@RequestParam(value = "group.id",defaultValue = "",required = false) String groupId) &#123; List&lt;String&gt; topicList = Arrays.asList(topics.split(",")); HashMap resultMap = new HashMap&lt;String,Object&gt;(); Properties consumerProperties = getConsumerProperties(); if (groupId.length() == 0) &#123; consumerProperties.put("group.id",UUID.randomUUID().toString()); &#125; else &#123; consumerProperties.put("group.id",groupId); &#125; consumerProperties.put("max.poll.records",limit); KafkaConsumer&lt;String,String&gt; kafkaConsumer = new KafkaConsumer&lt;String,String&gt;(consumerProperties); kafkaConsumer.subscribe(topicList); ConsumerRecords&lt;String,String&gt; consumerRecords = kafkaConsumer.poll(1000); resultMap.put("topics",topicList); List&lt;Map&gt; recordList = new ArrayList&lt;Map&gt;(); for (ConsumerRecord&lt;String, String&gt; record : consumerRecords) &#123; HashMap&lt;String,String&gt; recordMap = new HashMap&lt;&gt;(); recordMap.put("key",record.key()); recordMap.put("value",record.value()); recordMap.put("offset", String.valueOf(record.offset())); recordMap.put("partition", String.valueOf(record.partition())); recordMap.put("topic",record.topic()); recordMap.put("timestamp",String.valueOf(record.timestamp())); recordList.add(recordMap); &#125; resultMap.put("result",recordList); kafkaConsumer.close(); return resultMap; &#125; /** * 返回Producer配置 * @return */ private Properties getProducerProperties()&#123; Properties props = new Properties(); props.put("bootstrap.servers",this.bootStrapServers); props.put("key.serializer",this.keySerializer); props.put("value.serializer",this.valueSerializer); return props; &#125;; /** * 返回consumer配置 * @return */ private Properties getConsumerProperties()&#123; Properties props = new Properties(); props.put("bootstrap.servers",this.bootStrapServers); props.put("key.deserializer",this.keyDeserializer); props.put("value.deserializer",this.valueDeserializer); props.put("auto.offset.reset",this.autoOffsetReset); return props; &#125;; public static void main(String[] args) &#123; SpringApplication.run(DemoApplication.class, args); &#125; @Override public void run(String... args) throws Exception &#123; System.out.println("服务启动"); &#125;&#125; ###clean &amp;&amp; package &amp;&amp; run1mvn clean package &amp;&amp; docker run --name="spring_boot" --rm --net=docker_default -v "$PWD/target/http-demo-0.0.1-SNAPSHOT.jar:/app/app.jar" -p '10086:9527' bankmonitor/spring-boot 启动之后我们的接口监听在10086端口 调用producer接口1repeat 1000 echo "curl http://127.0.0.1:10086/producer/foo,bar/"`random protocol`"/"`random ip` | bash 此命令会生成1000条数据,key为随机协议名,value为随机ip,并且把数据发送到foo,bar两个topic(请现在kafka中准备好这两个主题)。 调用consumer接口12➜ blog curl http://127.0.0.1:10086/consumer/foo,bar/10&#123;"result":[&#123;"partition":"6","offset":"0","topic":"foo","value":"27.123.34","key":"mid","timestamp":"1489545404505"&#125;,&#123;"partition":"6","offset":"1","topic":"foo","value":"226.104.141","key":"mid","timestamp":"1489545405196"&#125;,&#123;"partition":"6","offset":"2","topic":"foo","value":"169.71.224","key":"mid","timestamp":"1489545405660"&#125;,&#123;"partition":"6","offset":"3","topic":"foo","value":"39.25.19","key":"mid","timestamp":"1489545408197"&#125;,&#123;"partition":"6","offset":"4","topic":"foo","value":"48.106.188","key":"mid","timestamp":"1489545411873"&#125;,&#123;"partition":"6","offset":"5","topic":"foo","value":"1.234.228","key":"mid","timestamp":"1489545416681"&#125;,&#123;"partition":"6","offset":"6","topic":"foo","value":"60.231.223","key":"mid","timestamp":"1489545417588"&#125;,&#123;"partition":"6","offset":"7","topic":"foo","value":"112.170.18","key":"mid","timestamp":"1489545418957"&#125;,&#123;"partition":"6","offset":"8","topic":"foo","value":"132.159.29","key":"mid","timestamp":"1489545421914"&#125;,&#123;"partition":"6","offset":"9","topic":"foo","value":"201.12.222","key":"mid","timestamp":"1489545427370"&#125;],"topics":["foo","bar"],"total_count":10&#125;%]]></content>
+    <title>java kafka-client应用与http实现</title>
+    <url>/2017/03/10/kafka-java-client/</url>
+    <content><![CDATA[<p>使用kafka-client实现producer api与consumer api,并且提供简单的http接口</p>
+<blockquote>
+<p>大多数情况下,我们使用kafka-connect来做kafka集群数据的收集与导出,使用kafka-steams api来做流式处理。在这之前我们先来了解一下java kafka client。<br>kafka不是一个有序的消息队列,<br>kafka不是一个有序的消息队列,<br>kafka不是一个有序的消息队列,<br>重要的事情说三遍。(￣▽￣;)<br><a id="more"></a></p>
+</blockquote>
+<h2 id="producer"><a href="#producer" class="headerlink" title="producer"></a>producer</h2><p>kafka producer主要负责负载均衡和异步发送,大致的过程如下:</p>
+<ol>
+<li>producer连接至kafka之后,会获取kafka集群中的partitions信息保存在<code>KafkaProducer</code>的<code>MetaData</code>中并定时刷新,如下表:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>topic</th>
+<th>partitions</th>
+<th>broker</th>
+<th>type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>  foo</td>
+<td>0</td>
+<td>1001</td>
+<td>leader</td>
+</tr>
+<tr>
+<td>  foo</td>
+<td>1</td>
+<td>1002</td>
+<td>replication</td>
+</tr>
+<tr>
+<td>  bar</td>
+<td>49</td>
+<td>1003</td>
+<td>leader</td>
+</tr>
+<tr>
+<td>  bar</td>
+<td>50</td>
+<td>1002</td>
+<td>repilcation</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li><code>ProducerRecorder</code>代表每条消息,包含四部分信息(key,value,topic,partitions,timestamp)</li>
+<li>根据<code>ProducerRecorder</code>提供的topic,partitions信息,<code>KafkaProducer</code>可以定位到一个leader broker,<code>KafkaProducer</code>与leader broker建立连接,通过<code>Future</code>异步发送<code>ProducerRecorder</code>至leader broker,保存key,value信息到指定的partitions。</li>
+</ol>
+<p>producer的负载均衡策略都是在客户端实现,<code>ProducerRecorder</code>类4个初始化参数非常重要,特别是partitions,该参数决定了负载如何分布。为了解决这个问题kafka-client提供了两种默认的partitions策略</p>
+<ol>
+<li>如果key为null,则轮询partitions,保证负载尽量均匀,但是<code>ProducerRecorder</code>仅在单个partitions中有序  (￣▽￣;).</li>
+<li>如果key存在,则将key通过hash算法确定一个partitions(此部分可自定义,实现<code>Partitioner</code>接口即可),此种方式负载并不均衡,但是因为相同的key会存在同一个partitions中,所以相同的key是有序的。</li>
+</ol>
+<p>推荐第二种方式,实际项目中kafka大多存储一些数据信息,比如用户行为,网站日志,监控信息,这些都是可以定义key的,可以将user_id,session ID,appID, IP,作为key.当我们需要一个有序队列提供给consumer时,可以通过stream api将按key过滤,流化到另外一个只有一个partitions的topic中。</p>
+<h2 id="consumer"><a href="#consumer" class="headerlink" title="consumer"></a>consumer</h2><p>kafka consumer 需要注意的几个地方</p>
+<ul>
+<li>consumer从topic pull数据,注意!! 是拉数据,并不是服务端push过来的.</li>
+<li>consumer pull数据的时候,需要指定partitions,如果不指定partitions,并且topic有多个partitions,那么拉取数据所选择的partitions是随机的,随机的,随机的(￣▽￣;).</li>
+<li>如果多个consumer指定同一个group.id,那么pull数据的时候,单个consumer与partitions绑定,也就是说如果同一个group.id的consumer数量大于partitions数量是没有意义的,超出partitions数量的consumer线程得不到任何数据.</li>
+<li>同一个group.id共享partitions的offset信息,多线程情况下请手动更新  (￣▽￣;);</li>
+</ul>
+<p>consumer详细的过程如下:</p>
+<ol>
+<li>consumer连接至kafka之后,会获取kafka集群中的partitions信息保存在<code>KafkaConsumer</code>的<code>MetaData</code>中并定时刷新.此部分与producer相同.</li>
+<li><code>KafkaConsumer</code>在<code>subscribe</code>会为每个topic维护类似下表的信息,logSize为partitions大小,offset为该group.id的目前的位置,lag为还剩下多少条数据。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Partition</th>
+<th>LogSize</th>
+<th>Consumer Offset</th>
+<th>lag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>100</td>
+<td>1</td>
+<td>99</td>
+</tr>
+<tr>
+<td>1</td>
+<td>100</td>
+<td>99</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>100</td>
+<td>23</td>
+<td>77</td>
+</tr>
+<tr>
+<td>3</td>
+<td>100</td>
+<td>7</td>
+<td>93</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li><code>KafkaConsumer</code>在<code>pull</code>时会根据subscribe信息定位到一个leader broker并建立连接,然后pull数据返回<code>ConsumerRecord</code>,<code>pull</code>的开始位置由上表的offset决定。pull完成之后,更新上表中的OffSet与lag信息(多线程情况下请手动commit)。</li>
+<li><code>ConsumerRecord</code>包含topic,key,value,timestamp,offset,partitions等信息。</li>
+</ol>
+<p>consumer在pull多个partitions的究竟是先从哪个partitions pull数据?,这个问题kafka-client提供两种策略:</p>
+<ol>
+<li>动态指定: <code>assign a
+fair share of the partitions for those topics based on the active consumers in the group</code>这个官方的说法,公平的选择partions,但是我没看到源码(￣▽￣;),测试来看貌似随机的.</li>
+<li>手动指定:此种方式通过<code>org.apache.kafka.clients.consumer.KafkaConsumer#assign</code>方法实现,可以手动指定Paritions</li>
+</ol>
+<p>推荐选择第一种方式,至于消息顺序问题,可以使用kafka stream api 解决。</p>
+<h2 id="为kafka集群搭建http接口"><a href="#为kafka集群搭建http接口" class="headerlink" title="为kafka集群搭建http接口"></a>为kafka集群搭建http接口</h2><p>kafka集群只有官方提供的java版本功能较为全面,其它语言有些是社区版本功能不完善,还有一些语言根本就没有client实现,比如php.此时对非java语言提供http接口访问kafka是最方便的,下面我们使用spring-boot来实现producer和consumer的http接口</p>
+<h3 id="原料"><a href="#原料" class="headerlink" title="原料"></a>原料</h3><ul>
+<li>Docker version 1.13.0</li>
+<li>docker-compose version 1.10.0</li>
+<li>zookeeper 集群 搭建方式见&lt;<a href="/2017/03/01/docker-zookeeper-cluster" title="使用docker创建zookeeper集群">使用docker创建zookeeper集群</a>&gt;</li>
+<li>kafka 集群 搭建方式见&lt;<a href="/2017/03/02/docker-kafka-cluster" title="使用docker创建kafka集群">使用docker创建kafka集群</a>&gt;</li>
+<li>spring-boot 使用方式见&lt;<a href="/2017/03/10/docker-spring-boot/" title="spring-boot微框架创建java docker应用">spring-boot微框架创建java docker应用</a>&gt;</li>
+<li>kafka-clients 0.10.1.1</li>
+</ul>
+<h3 id="接口设计"><a href="#接口设计" class="headerlink" title="接口设计"></a>接口设计</h3><p>设计接口的时候我们屏蔽了一些客户端不需要特别关注的细节,把这些细节处理放在http接口里面处理。</p>
+<p>producer接口</p>
+<ul>
+<li>GET /producer/{topics}/{key}/{value}</li>
+<li>RETURN {“topics”:topicList,”key”:key,”value”:value}</li>
+<li>说明: producer客户端只需要关心{topics}{key}{value}即可,{topics}可以为多个topic,<code>,</code>分割。</li>
+</ul>
+<p>consumer接口</p>
+<ul>
+<li>GET /consumer/{topics}/{limit}</li>
+<li>RETURN {“result”,ConsumerRecordList,”topics”:topicList}</li>
+<li>说明: consumer只需要提供{topics}{limit}即可,表明从那个topic取多少条数据,{topics}可以为多个topic,<code>,</code>分割。<code>auto.offset.reset</code>我们默认使用<code>earliest</code>取最早的数据,每次请求单独创建一个<code>group.id</code>(UUID)</li>
+</ul>
+<h3 id="创建spring-boot项目"><a href="#创建spring-boot项目" class="headerlink" title="创建spring boot项目"></a>创建spring boot项目</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">spring init</span><br></pre></td></tr></table></figure>
+<h3 id="修改pom-xml添加依赖"><a href="#修改pom-xml添加依赖" class="headerlink" title="修改pom.xml添加依赖"></a>修改pom.xml添加依赖</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.kafka<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-kafka<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.2.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>说明：spring-kafka包含kafka-client</p>
+<h3 id="修改application-properties"><a href="#修改application-properties" class="headerlink" title="修改application.properties"></a>修改application.properties</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#server</span><br><span class="line">server.port=9527</span><br><span class="line"></span><br><span class="line">#kafka</span><br><span class="line">kafka.global.bootstrap.servers=kafka1:9092,kafka2:9092,kafka3:9092</span><br><span class="line">kafka.producer.key.serializer=org.apache.kafka.common.serialization.StringSerializer</span><br><span class="line">kafka.producer.value.serializer=org.apache.kafka.common.serialization.StringSerializer</span><br><span class="line">kafka.producer.kakfa.global.compression.type=org.apache.kafka.common.serialization.StringSerializer</span><br><span class="line">kafka.consumer.key.deserializer=org.apache.kafka.common.serialization.StringDeserializer</span><br><span class="line">kafka.consumer.value.deserializer=org.apache.kafka.common.serialization.StringDeserializer</span><br><span class="line">kafka.consumer.auto.offset.reset=earliest</span><br></pre></td></tr></table></figure>
+<h3 id="编写DemoApplication-java"><a href="#编写DemoApplication-java" class="headerlink" title="编写DemoApplication.java"></a>编写DemoApplication.java</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRecord;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.consumer.ConsumerRecords;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.consumer.KafkaConsumer;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.producer.KafkaProducer;</span><br><span class="line"><span class="keyword">import</span> org.apache.kafka.clients.producer.ProducerRecord;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.CommandLineRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.EnableAutoConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.kafka.annotation.EnableKafka;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"ALL"</span>)</span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@EnableKafka</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.global.bootstrap.servers&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String bootStrapServers;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.producer.key.serializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String keySerializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.producer.value.serializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String valueSerializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.consumer.key.deserializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String keyDeserializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.consumer.value.deserializer&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String valueDeserializer;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;kafka.consumer.auto.offset.reset&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> String autoOffsetReset;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@RequestMapping</span>(value = <span class="string">"/producer/&#123;topics&#125;/&#123;key&#125;/&#123;value&#125;"</span>)</span><br><span class="line">	<span class="meta">@ResponseBody</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> HashMap <span class="title">producer</span><span class="params">(@PathVariable(value = <span class="string">"topics"</span>)</span> String topics,@<span class="title">PathVariable</span><span class="params">(value = <span class="string">"value"</span>)</span> String value,@<span class="title">PathVariable</span><span class="params">(value = <span class="string">"key"</span>)</span> String key) </span>&#123;</span><br><span class="line">		List&lt;String&gt; topicList = Arrays.asList(topics.split(<span class="string">","</span>));</span><br><span class="line">		HashMap resultMap = <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">		Properties producerProperties = getProducerProperties();</span><br><span class="line">		KafkaProducer&lt;String,String&gt; kafkaProducer = <span class="keyword">new</span> KafkaProducer&lt;String,String&gt;(producerProperties);</span><br><span class="line">		<span class="keyword">for</span> (String topic :</span><br><span class="line">				topicList) &#123;</span><br><span class="line">			ProducerRecord&lt;String,String&gt; producerRecord = <span class="keyword">new</span> ProducerRecord&lt;String,String&gt;(topic,key,value);</span><br><span class="line"></span><br><span class="line">			kafkaProducer.send(producerRecord);</span><br><span class="line">		&#125;</span><br><span class="line">		kafkaProducer.close();</span><br><span class="line">		resultMap.put(<span class="string">"topics"</span>,topicList);</span><br><span class="line">		resultMap.put(<span class="string">"value"</span>,value);</span><br><span class="line">		resultMap.put(<span class="string">"key"</span>,key);</span><br><span class="line">		<span class="keyword">return</span> resultMap;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@RequestMapping</span>(value = <span class="string">"/consumer/&#123;topics&#125;/&#123;limit&#125;"</span>)</span><br><span class="line">	<span class="meta">@ResponseBody</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> HashMap <span class="title">consumer</span><span class="params">(@PathVariable(value = <span class="string">"topics"</span>)</span> String topics,@<span class="title">PathVariable</span><span class="params">(<span class="string">"limit"</span>)</span> String limit,@<span class="title">RequestParam</span><span class="params">(value = <span class="string">"group.id"</span>,defaultValue = <span class="string">""</span>,required = <span class="keyword">false</span>)</span> String groupId) </span>&#123;</span><br><span class="line">		List&lt;String&gt; topicList = Arrays.asList(topics.split(<span class="string">","</span>));</span><br><span class="line">		HashMap resultMap = <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">		Properties consumerProperties = getConsumerProperties();</span><br><span class="line">		<span class="keyword">if</span> (groupId.length() == <span class="number">0</span>) &#123;</span><br><span class="line">			consumerProperties.put(<span class="string">"group.id"</span>,UUID.randomUUID().toString());</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			consumerProperties.put(<span class="string">"group.id"</span>,groupId);</span><br><span class="line">		&#125;</span><br><span class="line">		consumerProperties.put(<span class="string">"max.poll.records"</span>,limit);</span><br><span class="line">		KafkaConsumer&lt;String,String&gt; kafkaConsumer  = <span class="keyword">new</span> KafkaConsumer&lt;String,String&gt;(consumerProperties);</span><br><span class="line">		kafkaConsumer.subscribe(topicList);</span><br><span class="line">		ConsumerRecords&lt;String,String&gt; consumerRecords = kafkaConsumer.poll(<span class="number">1000</span>);</span><br><span class="line">		resultMap.put(<span class="string">"topics"</span>,topicList);</span><br><span class="line">		List&lt;Map&gt; recordList = <span class="keyword">new</span> ArrayList&lt;Map&gt;();</span><br><span class="line">		<span class="keyword">for</span> (ConsumerRecord&lt;String, String&gt; record : consumerRecords) &#123;</span><br><span class="line">			HashMap&lt;String,String&gt; recordMap =  <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">			recordMap.put(<span class="string">"key"</span>,record.key());</span><br><span class="line">			recordMap.put(<span class="string">"value"</span>,record.value());</span><br><span class="line">			recordMap.put(<span class="string">"offset"</span>, String.valueOf(record.offset()));</span><br><span class="line">			recordMap.put(<span class="string">"partition"</span>, String.valueOf(record.partition()));</span><br><span class="line">			recordMap.put(<span class="string">"topic"</span>,record.topic());</span><br><span class="line">			recordMap.put(<span class="string">"timestamp"</span>,String.valueOf(record.timestamp()));</span><br><span class="line">			recordList.add(recordMap);</span><br><span class="line">		&#125;</span><br><span class="line">		resultMap.put(<span class="string">"result"</span>,recordList);</span><br><span class="line">		kafkaConsumer.close();</span><br><span class="line">		<span class="keyword">return</span> resultMap;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 返回Producer配置</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> Properties <span class="title">getProducerProperties</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">		props.put(<span class="string">"bootstrap.servers"</span>,<span class="keyword">this</span>.bootStrapServers);</span><br><span class="line">		props.put(<span class="string">"key.serializer"</span>,<span class="keyword">this</span>.keySerializer);</span><br><span class="line">		props.put(<span class="string">"value.serializer"</span>,<span class="keyword">this</span>.valueSerializer);</span><br><span class="line">		<span class="keyword">return</span> props;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 返回consumer配置</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> Properties <span class="title">getConsumerProperties</span><span class="params">()</span></span>&#123;</span><br><span class="line">		Properties props = <span class="keyword">new</span> Properties();</span><br><span class="line">		props.put(<span class="string">"bootstrap.servers"</span>,<span class="keyword">this</span>.bootStrapServers);</span><br><span class="line">		props.put(<span class="string">"key.deserializer"</span>,<span class="keyword">this</span>.keyDeserializer);</span><br><span class="line">		props.put(<span class="string">"value.deserializer"</span>,<span class="keyword">this</span>.valueDeserializer);</span><br><span class="line">		props.put(<span class="string">"auto.offset.reset"</span>,<span class="keyword">this</span>.autoOffsetReset);</span><br><span class="line">		<span class="keyword">return</span> props;</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(DemoApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"服务启动"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###clean &amp;&amp; package &amp;&amp; run<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mvn clean package &amp;&amp; docker run --name=<span class="string">"spring_boot"</span> --rm --net=docker_default -v <span class="string">"<span class="variable">$PWD</span>/target/http-demo-0.0.1-SNAPSHOT.jar:/app/app.jar"</span> -p <span class="string">'10086:9527'</span> bankmonitor/spring-boot</span><br></pre></td></tr></table></figure></p>
+<p>启动之后我们的接口监听在10086端口</p>
+<h3 id="调用producer接口"><a href="#调用producer接口" class="headerlink" title="调用producer接口"></a>调用producer接口</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">repeat 1000 <span class="built_in">echo</span>  <span class="string">"curl http://127.0.0.1:10086/producer/foo,bar/"</span>`random protocol`<span class="string">"/"</span>`random ip` | bash</span><br></pre></td></tr></table></figure>
+<p>此命令会生成1000条数据,key为随机协议名,value为随机ip,并且把数据发送到foo,bar两个topic(请现在kafka中准备好这两个主题)。</p>
+<h3 id="调用consumer接口"><a href="#调用consumer接口" class="headerlink" title="调用consumer接口"></a>调用consumer接口</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">➜  blog curl http://127.0.0.1:10086/consumer/foo,bar/10</span><br><span class="line">&#123;<span class="string">"result"</span>:[&#123;<span class="string">"partition"</span>:<span class="string">"6"</span>,<span class="string">"offset"</span>:<span class="string">"0"</span>,<span class="string">"topic"</span>:<span class="string">"foo"</span>,<span class="string">"value"</span>:<span class="string">"27.123.34"</span>,<span class="string">"key"</span>:<span class="string">"mid"</span>,<span class="string">"timestamp"</span>:<span class="string">"1489545404505"</span>&#125;,&#123;<span class="string">"partition"</span>:<span class="string">"6"</span>,<span class="string">"offset"</span>:<span class="string">"1"</span>,<span class="string">"topic"</span>:<span class="string">"foo"</span>,<span class="string">"value"</span>:<span class="string">"226.104.141"</span>,<span class="string">"key"</span>:<span class="string">"mid"</span>,<span class="string">"timestamp"</span>:<span class="string">"1489545405196"</span>&#125;,&#123;<span class="string">"partition"</span>:<span class="string">"6"</span>,<span class="string">"offset"</span>:<span class="string">"2"</span>,<span class="string">"topic"</span>:<span class="string">"foo"</span>,<span class="string">"value"</span>:<span class="string">"169.71.224"</span>,<span class="string">"key"</span>:<span class="string">"mid"</span>,<span class="string">"timestamp"</span>:<span class="string">"1489545405660"</span>&#125;,&#123;<span class="string">"partition"</span>:<span class="string">"6"</span>,<span class="string">"offset"</span>:<span class="string">"3"</span>,<span class="string">"topic"</span>:<span class="string">"foo"</span>,<span class="string">"value"</span>:<span class="string">"39.25.19"</span>,<span class="string">"key"</span>:<span class="string">"mid"</span>,<span class="string">"timestamp"</span>:<span class="string">"1489545408197"</span>&#125;,&#123;<span class="string">"partition"</span>:<span class="string">"6"</span>,<span class="string">"offset"</span>:<span class="string">"4"</span>,<span class="string">"topic"</span>:<span class="string">"foo"</span>,<span class="string">"value"</span>:<span class="string">"48.106.188"</span>,<span class="string">"key"</span>:<span class="string">"mid"</span>,<span class="string">"timestamp"</span>:<span class="string">"1489545411873"</span>&#125;,&#123;<span class="string">"partition"</span>:<span class="string">"6"</span>,<span class="string">"offset"</span>:<span class="string">"5"</span>,<span class="string">"topic"</span>:<span class="string">"foo"</span>,<span class="string">"value"</span>:<span class="string">"1.234.228"</span>,<span class="string">"key"</span>:<span class="string">"mid"</span>,<span class="string">"timestamp"</span>:<span class="string">"1489545416681"</span>&#125;,&#123;<span class="string">"partition"</span>:<span class="string">"6"</span>,<span class="string">"offset"</span>:<span class="string">"6"</span>,<span class="string">"topic"</span>:<span class="string">"foo"</span>,<span class="string">"value"</span>:<span class="string">"60.231.223"</span>,<span class="string">"key"</span>:<span class="string">"mid"</span>,<span class="string">"timestamp"</span>:<span class="string">"1489545417588"</span>&#125;,&#123;<span class="string">"partition"</span>:<span class="string">"6"</span>,<span class="string">"offset"</span>:<span class="string">"7"</span>,<span class="string">"topic"</span>:<span class="string">"foo"</span>,<span class="string">"value"</span>:<span class="string">"112.170.18"</span>,<span class="string">"key"</span>:<span class="string">"mid"</span>,<span class="string">"timestamp"</span>:<span class="string">"1489545418957"</span>&#125;,&#123;<span class="string">"partition"</span>:<span class="string">"6"</span>,<span class="string">"offset"</span>:<span class="string">"8"</span>,<span class="string">"topic"</span>:<span class="string">"foo"</span>,<span class="string">"value"</span>:<span class="string">"132.159.29"</span>,<span class="string">"key"</span>:<span class="string">"mid"</span>,<span class="string">"timestamp"</span>:<span class="string">"1489545421914"</span>&#125;,&#123;<span class="string">"partition"</span>:<span class="string">"6"</span>,<span class="string">"offset"</span>:<span class="string">"9"</span>,<span class="string">"topic"</span>:<span class="string">"foo"</span>,<span class="string">"value"</span>:<span class="string">"201.12.222"</span>,<span class="string">"key"</span>:<span class="string">"mid"</span>,<span class="string">"timestamp"</span>:<span class="string">"1489545427370"</span>&#125;],<span class="string">"topics"</span>:[<span class="string">"foo"</span>,<span class="string">"bar"</span>],<span class="string">"total_count"</span>:10&#125;%</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
+        <tag>java</tag>
         <tag>kafka</tag>
         <tag>spring-boot</tag>
-        <tag>java</tag>
         <tag>kafka-client</tag>
         <tag>queue</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[spring-boot微框架创建java docker应用]]></title>
-    <url>%2F2017%2F03%2F10%2Fdocker-spring-boot%2F</url>
-    <content type="text"><![CDATA[使用sping-boot用最简单的方式发布一个包含http接口的docker服务。 目前项目上本地和测试环境中全部的中间件与server都是部署在docker环境,调试过程中需要将client端代码发布到docker container中运行,spring依赖注入的特性可以简化开发,但是xml配置非常繁琐,spring boot很好的解决了这个问题,下面我们用spring boot做一个简单的docker应用。 原料 Docker version 1.13.0 bankmonitor/spring-boot 镜像 spring boot v1.5.2.RELEASE使用spring boot微框架初始化项目初始化项目:123spring init http-demoUsing service at https://start.spring.ioProject extracted to '/Users/zhaoliang/project/http-demo' 该命令生成了一个包含spring基本组件的项目,目录结构不写了,标准的java项目,只说一下application.properties. 这个文件是spring boot的应用配置文件(说明见spring-boot-doc),我们添加一个server.port=9527,这个配置会修改嵌入tomcat的监听端口,application.properties中的配置内容可以通过@Value(&quot;{key}&quot;)在spring boot中引用,下面的例子会讲。 coding进入项目目录添加新类DemoApplication.java内容如下：12345678910111213141516171819202122232425262728package com.example;import org.springframework.beans.factory.annotation.Value;import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.EnableAutoConfiguration;import org.springframework.boot.autoconfigure.SpringBootApplication;import org.springframework.web.bind.annotation.RequestMapping;import org.springframework.web.bind.annotation.RestController;@SpringBootApplication@EnableAutoConfiguration@RestControllerpublic class DemoApplication implements CommandLineRunner &#123; @Value("$&#123;server.port&#125;") public Integer port; @RequestMapping(value = "/hi") public String hi() &#123; return "helloWorld:" + this.port; &#125; public static void main(String[] args) &#123; SpringApplication.run(DemoApplication.class, args); &#125; @Override public void run(String... args) throws Exception &#123; System.out.println("服务启动"); &#125;&#125; 说明:访问/hi服务端会返回”helloworld” 和我们在application.properties配置的端口信息.实现CommandLineRunner 在服务启动时候执行加载一些数据。 package &amp;&amp; run运行命令:12345678910111213mvn clean package[INFO][INFO] --- maven-jar-plugin:2.6:jar (default-jar) @ http-demo ---[INFO] Building jar: /Users/zhaoliang/project/http-demo/target/http-demo-0.0.1-SNAPSHOT.jar[INFO][INFO] --- spring-boot-maven-plugin:1.5.2.RELEASE:repackage (default) @ http-demo ---[INFO] ------------------------------------------------------------------------[INFO] BUILD SUCCESS[INFO] ------------------------------------------------------------------------[INFO] Total time: 4.690 s[INFO] Finished at: 2017-03-10T14:26:57+08:00[INFO] Final Memory: 28M/312M[INFO] ------------------------------------------------------------------------ ./target/http-demo-0.0.1-SNAPSHOT.jar为打包结果。 本地运行:1java -jar target/http-demo-0.0.1-SNAPSHOT.jar 查看结果:12curl http://127.0.0.1:9527/hihelloWorld:9527% 使用容器运行我们使用bankmonitor/spring-boot镜像来运行spring boot程序,镜像启动时候会执行如下cmd:1CMD [\"/bin/sh\" \"-c\" \"java $JAVA_OPTS -jar /app/app.jar --spring.profiles.active=$SPRING_PROFILES_ACTIVE\"] 这就简单了,我们只需要在容器启动时将./target/http-demo-0.0.1-SNAPSHOT.jar挂载到容器文件/app/app.jar即可运行命令:1docker run --rm -v "$PWD/target/http-demo-0.0.1-SNAPSHOT.jar:/app/app.jar" -p "10086:9527" bankmonitor/spring-boot 我们把容器9527端口映射到本地10086端口（´➰｀) 查看结果:12curl http://127.0.0.1:10086/hihelloWorld:10086% 结语spring-boot非常适合作为微框架,并且非常简单,简化了大分布的配置操作,再今后如有使用到新的特性与依赖,会再做分享。]]></content>
+    <title>spring-boot微框架创建java docker应用</title>
+    <url>/2017/03/10/docker-spring-boot/</url>
+    <content><![CDATA[<p>使用sping-boot用最简单的方式发布一个包含http接口的docker服务。</p>
+<blockquote>
+<p>目前项目上本地和测试环境中全部的中间件与server都是部署在docker环境,调试过程中需要将client端代码发布到docker container中运行,spring依赖注入的特性可以简化开发,但是xml配置非常繁琐,spring boot很好的解决了这个问题,下面我们用spring boot做一个简单的docker应用。<br><a id="more"></a></p>
+</blockquote>
+<h2 id="原料"><a href="#原料" class="headerlink" title="原料"></a>原料</h2><ul>
+<li>Docker version 1.13.0</li>
+<li>bankmonitor/spring-boot 镜像</li>
+<li>spring boot v1.5.2.RELEASE<h2 id="使用spring-boot微框架初始化项目"><a href="#使用spring-boot微框架初始化项目" class="headerlink" title="使用spring boot微框架初始化项目"></a>使用spring boot微框架初始化项目</h2>初始化项目:<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">spring init http-demo</span><br><span class="line">Using service at https://start.spring.io</span><br><span class="line">Project extracted to <span class="string">'/Users/zhaoliang/project/http-demo'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>该命令生成了一个包含spring基本组件的项目,目录结构不写了,标准的java项目,只说一下application.properties. 这个文件是spring boot的应用配置文件(说明见<a href="https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/" title="spring-boot-doc" target="_blank" rel="noopener">spring-boot-doc</a>),我们添加一个<code>server.port=9527</code>,这个配置会修改嵌入tomcat的监听端口,application.properties中的配置内容可以通过<code>@Value(&quot;{key}&quot;)</code>在spring boot中引用,下面的例子会讲。</p>
+<h2 id="coding"><a href="#coding" class="headerlink" title="coding"></a>coding</h2><p>进入项目目录添加新类<code>DemoApplication.java</code>内容如下：<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.EnableAutoConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;server.port&#125;"</span>)</span><br><span class="line">	<span class="keyword">public</span> Integer port;</span><br><span class="line">	<span class="meta">@RequestMapping</span>(value = <span class="string">"/hi"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">hi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="string">"helloWorld:"</span> + <span class="keyword">this</span>.port;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(DemoApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"服务启动"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>说明:访问<code>/hi</code>服务端会返回”helloworld” 和我们在application.properties配置的端口信息.实现<code>CommandLineRunner</code> 在服务启动时候执行加载一些数据。</p>
+<h2 id="package-amp-amp-run"><a href="#package-amp-amp-run" class="headerlink" title="package &amp;&amp; run"></a>package &amp;&amp; run</h2><p>运行命令:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mvn clean  package</span><br><span class="line">[INFO]</span><br><span class="line">[INFO] --- maven-jar-plugin:2.6:jar (default-jar) @ http-demo ---</span><br><span class="line">[INFO] Building jar: /Users/zhaoliang/project/http-demo/target/http-demo-0.0.1-SNAPSHOT.jar</span><br><span class="line">[INFO]</span><br><span class="line">[INFO] --- spring-boot-maven-plugin:1.5.2.RELEASE:repackage (default) @ http-demo ---</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 4.690 s</span><br><span class="line">[INFO] Finished at: 2017-03-10T14:26:57+08:00</span><br><span class="line">[INFO] Final Memory: 28M/312M</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br></pre></td></tr></table></figure></p>
+<p><code>./target/http-demo-0.0.1-SNAPSHOT.jar</code>为打包结果。</p>
+<p>本地运行:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">java -jar target/http-demo-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure></p>
+<p>查看结果:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl http://127.0.0.1:9527/hi</span><br><span class="line">helloWorld:9527%</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用容器运行"><a href="#使用容器运行" class="headerlink" title="使用容器运行"></a>使用容器运行</h2><p>我们使用<code>bankmonitor/spring-boot</code>镜像来运行spring boot程序,镜像启动时候会执行如下cmd:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CMD [\"/bin/sh\" \"-c\" \"java <span class="variable">$JAVA_OPTS</span> -jar /app/app.jar --spring.profiles.active=<span class="variable">$SPRING_PROFILES_ACTIVE</span>\"]</span><br></pre></td></tr></table></figure></p>
+<p>这就简单了,我们只需要在容器启动时将<code>./target/http-demo-0.0.1-SNAPSHOT.jar</code>挂载到容器文件<code>/app/app.jar</code>即可<br>运行命令:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --rm -v <span class="string">"<span class="variable">$PWD</span>/target/http-demo-0.0.1-SNAPSHOT.jar:/app/app.jar"</span> -p <span class="string">"10086:9527"</span> bankmonitor/spring-boot</span><br></pre></td></tr></table></figure></p>
+<p>我们把容器9527端口映射到本地10086端口（´➰｀)</p>
+<p>查看结果:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">curl http://127.0.0.1:10086/hi</span><br><span class="line">helloWorld:10086%</span><br></pre></td></tr></table></figure></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>spring-boot非常适合作为微框架,并且非常简单,简化了大分布的配置操作,再今后如有使用到新的特性与依赖,会再做分享。</p>
+]]></content>
       <categories>
         <category>技术</category>
       </categories>
       <tags>
+        <tag>java</tag>
         <tag>docker</tag>
         <tag>spring-boot</tag>
-        <tag>java</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[使用docker创建kafka集群]]></title>
-    <url>%2F2017%2F03%2F02%2Fdocker-kafka-cluster%2F</url>
-    <content type="text"><![CDATA[如何使用docker创建一个包含三个节点的kafka集群(非伪分布式),并提供web管理界面。 近期在项目上使用阿里datahub做存储用户行为并且做流式计算,kafka也是大数据解决方案中的一部分,接下来准备从kafka的环境搭建开始,分享一些相关内容。 原料 Docker version 1.13.0 docker-compose version 1.10.0 wurstmeister/kafka 镜像 服务端 ryane/kafkacat 镜像 客户端 sheepkiller/kafka-manager 镜像 管理工具kafka-manager是雅虎推出的kafka管理器偏重于集群与topic管理 zookeeper 集群 搭建方式见&lt;使用docker创建zookeeper集群&gt; 集群搭建编辑kafka.yml配置文件1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374version: '2'services: kafka1: image: wurstmeister/kafka container_name: kafka1 restart: always ports: - "9092" expose: - "9092" environment: KAFKA_BROKER_ID: 1001 KAFKA_BROKER_ID_GENERATION_ENABLE: "false" KAFKA_DELETE_TOPIC_ENABLE: "true" KAFAK_HOST_NAME: kafka1 KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false" KAFKA_ADVERTISED_HOST_NAME: kafka1 KAFKA_ADVERTISED_PORT: 9092 JMX_PORT: 9999 KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181 volumes: - "./storge/kafka1:/opt/kafka/data:rw" kafka2: image: wurstmeister/kafka container_name: kafka2 restart: always ports: - "9092" expose: - "9092" environment: KAFKA_BROKER_ID: 1002 KAFKA_BROKER_ID_GENERATION_ENABLE: "false" KAFKA_DELETE_TOPIC_ENABLE: "true" KAFAK_HOST_NAME: kafka2 KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false" KAFKA_ADVERTISED_HOST_NAME: kafka2 KAFKA_ADVERTISED_PORT: 9092 JMX_PORT: 9999 KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181 volumes: - "./storge/kafka2:/opt/kafka/data:rw" kafka3: image: wurstmeister/kafka container_name: kafka3 restart: always ports: - "9092" expose: - "9092" environment: KAFKA_BROKER_ID: 1003 KAFKA_BROKER_ID_GENERATION_ENABLE: "false" KAFKA_DELETE_TOPIC_ENABLE: "true" KAFAK_HOST_NAME: kafka3 KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false" KAFKA_ADVERTISED_HOST_NAME: kafka3 KAFKA_ADVERTISED_PORT: 9092 JMX_PORT: 9999 KAFKA_ZOOKEEPER_CONNECT: zoo1:2181,zoo2:2181,zoo3:2181 volumes: - "./storge/kafka3:/opt/kafka/data:rw" kafka-manager: image: sheepkiller/kafka-manager restart: always container_name: kafka-manager ports: - "9000:9000" expose: - "9000" environment: HOSTNAME: kafka-manager APPLICATION_SECRET: letmein ZK_HOSTS: zoo1:2181,zoo2:2181,zoo3:2181 运行服务123456789101112➜ docker docker-compose -f kafka.yml up -dkafka-manager is up-to-datekafka1 is up-to-datekafka2 is up-to-datekafka3 is up-to-date➜ docker docker-compose -f kafka.yml ps Name Command State Ports--------------------------------------------------------------------------kafka-manager ./start-kafka-manager.sh Up 0.0.0.0:9000-&gt;9000/tcpkafka1 start-kafka.sh Up 0.0.0.0:32813-&gt;9092/tcpkafka2 start-kafka.sh Up 0.0.0.0:32814-&gt;9092/tcpkafka3 start-kafka.sh Up 0.0.0.0:32815-&gt;9092/tcp 使用方式kafka-manger web界面 地址：http://127.0.0.1:9000 说明 集群包含三个kafka节点:kafka1,kafka2,kafka3,分别监听docker端口为2181 kafka集群依赖zookeeper集群(zoo1,zoo2,zoo3) zookeeper kafka-manager监听在本地9000端口,通过http://127.0.0.1:9000访问 几个关键参数说明 KAFKA_BROKER_ID: 1001 BROKERID作为KAFA节点的唯一标示,在docker环境下我们显式指定,避免在容器重建的时候BROKERID变化 KAFKA_BROKER_ID_GENERATION_ENABLE: &quot;false&quot; _默认为true,我们需要显式指定BROKER_ID,设置为false_ KAFKA_DELETE_TOPIC_ENABLE: &quot;false&quot; 开启删除topic功能,方便在zk-manager中进行删除topic操作 KAFAK_HOST_NAME: kafka 此处使用docker主机名 KAFKA_AUTO_CREATE_TOPICS_ENABLE: &quot;false&quot; 默认为true,我们使用zk-manager进行kafka的topic管理,不允许自动创建 KAFKA_ADVERTISED_HOST_NAME: kafka broker监听域名,这个非常重要,此地址会被注册到zookeeper,请确保docker容器内可以访问 KAFKA_ADVERTISED_PORT: 9092 broker监听端口,重要性同上 JMX_PORT: 9999 开启jmx以便z-manager监控broker状态 ZK_HOSTS: zoo1:2181,zoo2:2181,zoo3:2181 zookeeper地址,这个配置不用多说了 连接到kafka创建测试用topic首先,我们先访问kafka-manager(http:127.0.0.1:9000) 创建一个cluster和一个topictest : 1 Replication : 1 Partitions 安装kafkacat我们使用kafkacat命令行工具作为Produce，Consume演示工具,我们需要访问docker环境内的kafka集群,所以我们用一个带有ENTRYPOINT功能的镜像1docker pull ryane/kafkacat 在使用kafkacat ENTRYPOINT时候需要加入--net=docker_default 准备测试数据现在我们准备一些数据,kafka消息数据至少需要一个key和一个value,我们使用mockjs来做随机数据生成 安装mockjs1npm install nockjs -g 创建测试数据目录1mkdir data 执行生成数据命令进入data目录1repeat 100 echo "`random color`,`random guid`" &gt;&gt; test.csv 此名称生成一个随机的颜色数值和一个随机的guid并且用”,”连接,重复100遍,100遍啊,100遍ヽ(*´∀｀)ノ 查看结果1234567891011tail -f test.csv#9bf279,Ba50fEc5-f7CB-f56b-1FA5-0Ee6c79FA51C#ebf279,cf9FB33f-ca2F-B7f9-0D79-EC0bFF5d5c79#f28479,e24f4823-ccd9-Ad46-2AC0-303FB7cbbC6B#f279f2,6bBDC57b-DEA2-cdfF-b78a-35a6189F9Ffd#7994f2,7aBdfDfF-583A-9CBF-EF62-CEFBddee3982#79cef2,FF9dbEDF-9BC2-Fe9f-A08C-40eFdF578e7D#7987f2,8dAbbaBC-F5f6-cc67-1Fb3-536D21ec5E74#e279f2,37c71A49-ec38-BC0c-7cFF-B4EE8d5ceCFC#f2c679,aD23b7FA-003a-B5E4-78C4-FAC2bb1Ecb2E#8b79f2,4Ff1dAF2-9b7c-FCe7-d66c-CC49972C0cd0 测试数据生成是另一个独立的问题,相关的工具和方法有时间再分享 Produce实例运行命令1docker run --net=docker_default -v="$PWD/data/test.csv:/test.csv" --rm -it ryane/kafkacat -P -b kafka1:9092,kafka2:9092,kafka3:9092 -t test -l /test.csv -K , 此命令会开启一个kafkacat ENTRYPOINT镜像,发送test.csv数据到test topic,一行一条消息,keyvalue以”,”分割。 Consumer实例运行命令123456789101112docker run --net=docker_default --rm -it ryane/kafkacat -C -b kafka1:9092,kafka2:9092,kafka3:9092 -t test -o -10 -f 'Topic:%t partion:%p offset:%o key:%k value:%s\n'Topic:test partion:0 offset:91 key:#9bf279 value:Ba50fEc5-f7CB-f56b-1FA5-0Ee6c79FA51CTopic:test partion:0 offset:92 key:#ebf279 value:cf9FB33f-ca2F-B7f9-0D79-EC0bFF5d5c79Topic:test partion:0 offset:93 key:#f28479 value:e24f4823-ccd9-Ad46-2AC0-303FB7cbbC6BTopic:test partion:0 offset:94 key:#f279f2 value:6bBDC57b-DEA2-cdfF-b78a-35a6189F9FfdTopic:test partion:0 offset:95 key:#7994f2 value:7aBdfDfF-583A-9CBF-EF62-CEFBddee3982Topic:test partion:0 offset:96 key:#79cef2 value:FF9dbEDF-9BC2-Fe9f-A08C-40eFdF578e7DTopic:test partion:0 offset:97 key:#7987f2 value:8dAbbaBC-F5f6-cc67-1Fb3-536D21ec5E74Topic:test partion:0 offset:98 key:#e279f2 value:37c71A49-ec38-BC0c-7cFF-B4EE8d5ceCFCTopic:test partion:0 offset:99 key:#f2c679 value:aD23b7FA-003a-B5E4-78C4-FAC2bb1Ecb2ETopic:test partion:0 offset:100 key:#8b79f2 value:4Ff1dAF2-9b7c-FCe7-d66c-CC49972C0cd0% Reached end of topic test [0] at offset 101 从test topic中获取最后10个消息并且打印信息 开启新窗口多次执行producer命令,consumer会持续的打印输出。 结语至此我们已经使用搭建了一个基本的kafka集群系统,以后会增加一下集群运维和应用场景的分享。]]></content>
+    <title>使用docker创建kafka集群</title>
+    <url>/2017/03/02/docker-kafka-cluster/</url>
+    <content><![CDATA[<p>如何使用docker创建一个包含三个节点的kafka集群(非伪分布式),并提供web管理界面。</p>
+<blockquote>
+<p>近期在项目上使用阿里datahub做存储用户行为并且做流式计算,kafka也是大数据解决方案中的一部分,接下来准备从kafka的环境搭建开始,分享一些相关内容。<br><a id="more"></a></p>
+</blockquote>
+<h2 id="原料"><a href="#原料" class="headerlink" title="原料"></a>原料</h2><ul>
+<li>Docker version 1.13.0</li>
+<li>docker-compose version 1.10.0</li>
+<li>wurstmeister/kafka 镜像 服务端</li>
+<li>ryane/kafkacat 镜像 客户端</li>
+<li>sheepkiller/kafka-manager 镜像 管理工具<a href="https://github.com/yahoo/kafka-manager" title="kafka-manager" target="_blank" rel="noopener">kafka-manager</a>是雅虎推出的kafka管理器偏重于集群与topic管理</li>
+<li>zookeeper 集群 搭建方式见&lt;<a href="/2017/03/01/docker-zookeeper-cluster" title="使用docker创建zookeeper集群">使用docker创建zookeeper集群</a>&gt;</li>
+</ul>
+<h2 id="集群搭建"><a href="#集群搭建" class="headerlink" title="集群搭建"></a>集群搭建</h2><h3 id="编辑kafka-yml配置文件"><a href="#编辑kafka-yml配置文件" class="headerlink" title="编辑kafka.yml配置文件"></a>编辑kafka.yml配置文件</h3><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'2'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">kafka1:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">wurstmeister/kafka</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kafka1</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"9092"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"9092"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">KAFKA_BROKER_ID:</span> <span class="number">1001</span></span><br><span class="line">      <span class="attr">KAFKA_BROKER_ID_GENERATION_ENABLE:</span> <span class="string">"false"</span></span><br><span class="line">      <span class="attr">KAFKA_DELETE_TOPIC_ENABLE:</span> <span class="string">"true"</span></span><br><span class="line">      <span class="attr">KAFAK_HOST_NAME:</span> <span class="string">kafka1</span></span><br><span class="line">      <span class="attr">KAFKA_AUTO_CREATE_TOPICS_ENABLE:</span> <span class="string">"false"</span></span><br><span class="line">      <span class="attr">KAFKA_ADVERTISED_HOST_NAME:</span> <span class="string">kafka1</span></span><br><span class="line">      <span class="attr">KAFKA_ADVERTISED_PORT:</span> <span class="number">9092</span></span><br><span class="line">      <span class="attr">JMX_PORT:</span> <span class="number">9999</span></span><br><span class="line">      <span class="attr">KAFKA_ZOOKEEPER_CONNECT:</span> <span class="string">zoo1:2181,zoo2:2181,zoo3:2181</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/kafka1:/opt/kafka/data:rw"</span></span><br><span class="line">  <span class="attr">kafka2:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">wurstmeister/kafka</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kafka2</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"9092"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"9092"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">KAFKA_BROKER_ID:</span> <span class="number">1002</span></span><br><span class="line">      <span class="attr">KAFKA_BROKER_ID_GENERATION_ENABLE:</span> <span class="string">"false"</span></span><br><span class="line">      <span class="attr">KAFKA_DELETE_TOPIC_ENABLE:</span> <span class="string">"true"</span></span><br><span class="line">      <span class="attr">KAFAK_HOST_NAME:</span> <span class="string">kafka2</span></span><br><span class="line">      <span class="attr">KAFKA_AUTO_CREATE_TOPICS_ENABLE:</span> <span class="string">"false"</span></span><br><span class="line">      <span class="attr">KAFKA_ADVERTISED_HOST_NAME:</span> <span class="string">kafka2</span></span><br><span class="line">      <span class="attr">KAFKA_ADVERTISED_PORT:</span> <span class="number">9092</span></span><br><span class="line">      <span class="attr">JMX_PORT:</span> <span class="number">9999</span></span><br><span class="line">      <span class="attr">KAFKA_ZOOKEEPER_CONNECT:</span> <span class="string">zoo1:2181,zoo2:2181,zoo3:2181</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/kafka2:/opt/kafka/data:rw"</span></span><br><span class="line">  <span class="attr">kafka3:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">wurstmeister/kafka</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kafka3</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"9092"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"9092"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">KAFKA_BROKER_ID:</span> <span class="number">1003</span></span><br><span class="line">      <span class="attr">KAFKA_BROKER_ID_GENERATION_ENABLE:</span> <span class="string">"false"</span></span><br><span class="line">      <span class="attr">KAFKA_DELETE_TOPIC_ENABLE:</span> <span class="string">"true"</span></span><br><span class="line">      <span class="attr">KAFAK_HOST_NAME:</span> <span class="string">kafka3</span></span><br><span class="line">      <span class="attr">KAFKA_AUTO_CREATE_TOPICS_ENABLE:</span> <span class="string">"false"</span></span><br><span class="line">      <span class="attr">KAFKA_ADVERTISED_HOST_NAME:</span> <span class="string">kafka3</span></span><br><span class="line">      <span class="attr">KAFKA_ADVERTISED_PORT:</span> <span class="number">9092</span></span><br><span class="line">      <span class="attr">JMX_PORT:</span> <span class="number">9999</span></span><br><span class="line">      <span class="attr">KAFKA_ZOOKEEPER_CONNECT:</span> <span class="string">zoo1:2181,zoo2:2181,zoo3:2181</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/kafka3:/opt/kafka/data:rw"</span></span><br><span class="line">  <span class="attr">kafka-manager:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">sheepkiller/kafka-manager</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kafka-manager</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"9000:9000"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"9000"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">HOSTNAME:</span> <span class="string">kafka-manager</span></span><br><span class="line">      <span class="attr">APPLICATION_SECRET:</span> <span class="string">letmein</span></span><br><span class="line">      <span class="attr">ZK_HOSTS:</span> <span class="string">zoo1:2181,zoo2:2181,zoo3:2181</span></span><br></pre></td></tr></table></figure>
+<h3 id="运行服务"><a href="#运行服务" class="headerlink" title="运行服务"></a>运行服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">➜  docker docker-compose -f kafka.yml up -d</span><br><span class="line">kafka-manager is up-to-date</span><br><span class="line">kafka1 is up-to-date</span><br><span class="line">kafka2 is up-to-date</span><br><span class="line">kafka3 is up-to-date</span><br><span class="line">➜  docker docker-compose -f kafka.yml ps</span><br><span class="line">    Name                Command            State            Ports</span><br><span class="line">--------------------------------------------------------------------------</span><br><span class="line">kafka-manager   ./start-kafka-manager.sh   Up      0.0.0.0:9000-&gt;9000/tcp</span><br><span class="line">kafka1          start-kafka.sh             Up      0.0.0.0:32813-&gt;9092/tcp</span><br><span class="line">kafka2          start-kafka.sh             Up      0.0.0.0:32814-&gt;9092/tcp</span><br><span class="line">kafka3          start-kafka.sh             Up      0.0.0.0:32815-&gt;9092/tcp</span><br></pre></td></tr></table></figure>
+<h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><p>kafka-manger web界面 地址：<a href="http://127.0.0.1:9000" target="_blank" rel="noopener">http://127.0.0.1:9000</a><br><img src="/2017/03/02/docker-kafka-cluster/kafka-manager.png" alt="kafka-manager"></p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
+<li>集群包含三个kafka节点:kafka1,kafka2,kafka3,分别监听docker端口为2181</li>
+<li>kafka集群依赖zookeeper集群(zoo1,zoo2,zoo3) zookeeper</li>
+<li>kafka-manager监听在本地9000端口,通过<a href="http://127.0.0.1:9000访问" target="_blank" rel="noopener">http://127.0.0.1:9000访问</a></li>
+</ul>
+<p>几个关键参数说明</p>
+<ul>
+<li><code>KAFKA_BROKER_ID: 1001</code><ul>
+<li><em>BROKERID作为KAFA节点的唯一标示,在docker环境下我们显式指定,避免在容器重建的时候BROKERID变化</em></li>
+</ul>
+</li>
+<li><code>KAFKA_BROKER_ID_GENERATION_ENABLE: &quot;false&quot;</code><ul>
+<li>_默认为true,我们需要显式指定BROKER_ID,设置为false_</li>
+</ul>
+</li>
+<li><code>KAFKA_DELETE_TOPIC_ENABLE: &quot;false&quot;</code><ul>
+<li><em>开启删除topic功能,方便在zk-manager中进行删除topic操作</em></li>
+</ul>
+</li>
+<li><code>KAFAK_HOST_NAME: kafka</code><ul>
+<li><em>此处使用docker主机名</em></li>
+</ul>
+</li>
+<li><code>KAFKA_AUTO_CREATE_TOPICS_ENABLE: &quot;false&quot;</code><ul>
+<li><em>默认为true,我们使用zk-manager进行kafka的topic管理,不允许自动创建</em></li>
+</ul>
+</li>
+<li><code>KAFKA_ADVERTISED_HOST_NAME: kafka</code><ul>
+<li><em>broker监听域名,这个非常重要,此地址会被注册到zookeeper,请确保docker容器内可以访问</em></li>
+</ul>
+</li>
+<li><code>KAFKA_ADVERTISED_PORT: 9092</code><ul>
+<li><em>broker监听端口,重要性同上</em></li>
+</ul>
+</li>
+<li><code>JMX_PORT: 9999</code><ul>
+<li><em>开启jmx以便z-manager监控broker状态</em></li>
+</ul>
+</li>
+<li><code>ZK_HOSTS: zoo1:2181,zoo2:2181,zoo3:2181</code><ul>
+<li><em>zookeeper地址,这个配置不用多说了</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="连接到kafka"><a href="#连接到kafka" class="headerlink" title="连接到kafka"></a>连接到kafka</h2><h3 id="创建测试用topic"><a href="#创建测试用topic" class="headerlink" title="创建测试用topic"></a>创建测试用topic</h3><p>首先,我们先访问kafka-manager(http:127.0.0.1:9000) 创建一个cluster和一个topic<br>test : 1 Replication : 1 Partitions<br><img src="/2017/03/02/docker-kafka-cluster/kafka-manager-topic.png" alt="kafka-manager-topic"></p>
+<h3 id="安装kafkacat"><a href="#安装kafkacat" class="headerlink" title="安装kafkacat"></a>安装kafkacat</h3><p>我们使用kafkacat命令行工具作为Produce，Consume演示工具,我们需要访问docker环境内的kafka集群,所以我们用一个带有ENTRYPOINT功能的镜像<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker pull ryane/kafkacat</span><br></pre></td></tr></table></figure></p>
+<p>在使用kafkacat ENTRYPOINT时候需要加入<code>--net=docker_default</code></p>
+<h3 id="准备测试数据"><a href="#准备测试数据" class="headerlink" title="准备测试数据"></a>准备测试数据</h3><p>现在我们准备一些数据,kafka消息数据至少需要一个key和一个value,我们使用mockjs来做随机数据生成</p>
+<h4 id="安装mockjs"><a href="#安装mockjs" class="headerlink" title="安装mockjs"></a>安装mockjs</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install nockjs -g</span><br></pre></td></tr></table></figure>
+<h4 id="创建测试数据目录"><a href="#创建测试数据目录" class="headerlink" title="创建测试数据目录"></a>创建测试数据目录</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir data</span><br></pre></td></tr></table></figure>
+<h4 id="执行生成数据命令"><a href="#执行生成数据命令" class="headerlink" title="执行生成数据命令"></a>执行生成数据命令</h4><p>进入data目录<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">repeat 100 <span class="built_in">echo</span> <span class="string">"`random color`,`random guid`"</span> &gt;&gt; test.csv</span><br></pre></td></tr></table></figure></p>
+<p>此名称生成一个随机的颜色数值和一个随机的guid并且用”,”连接,重复100遍,100遍啊,100遍ヽ(*´∀｀)ノ</p>
+<p>查看结果<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tail -f test.csv</span><br><span class="line"><span class="comment">#9bf279,Ba50fEc5-f7CB-f56b-1FA5-0Ee6c79FA51C</span></span><br><span class="line"><span class="comment">#ebf279,cf9FB33f-ca2F-B7f9-0D79-EC0bFF5d5c79</span></span><br><span class="line"><span class="comment">#f28479,e24f4823-ccd9-Ad46-2AC0-303FB7cbbC6B</span></span><br><span class="line"><span class="comment">#f279f2,6bBDC57b-DEA2-cdfF-b78a-35a6189F9Ffd</span></span><br><span class="line"><span class="comment">#7994f2,7aBdfDfF-583A-9CBF-EF62-CEFBddee3982</span></span><br><span class="line"><span class="comment">#79cef2,FF9dbEDF-9BC2-Fe9f-A08C-40eFdF578e7D</span></span><br><span class="line"><span class="comment">#7987f2,8dAbbaBC-F5f6-cc67-1Fb3-536D21ec5E74</span></span><br><span class="line"><span class="comment">#e279f2,37c71A49-ec38-BC0c-7cFF-B4EE8d5ceCFC</span></span><br><span class="line"><span class="comment">#f2c679,aD23b7FA-003a-B5E4-78C4-FAC2bb1Ecb2E</span></span><br><span class="line"><span class="comment">#8b79f2,4Ff1dAF2-9b7c-FCe7-d66c-CC49972C0cd0</span></span><br></pre></td></tr></table></figure></p>
+<p>测试数据生成是另一个独立的问题,相关的工具和方法有时间再分享</p>
+<h3 id="Produce实例"><a href="#Produce实例" class="headerlink" title="Produce实例"></a>Produce实例</h3><p>运行命令<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --net=docker_default -v=<span class="string">"<span class="variable">$PWD</span>/data/test.csv:/test.csv"</span> --rm -it ryane/kafkacat -P -b kafka1:9092,kafka2:9092,kafka3:9092 -t <span class="built_in">test</span> -l /test.csv -K ,</span><br></pre></td></tr></table></figure></p>
+<p>此命令会开启一个kafkacat ENTRYPOINT镜像,发送test.csv数据到test topic,一行一条消息,keyvalue以”,”分割。</p>
+<h3 id="Consumer实例"><a href="#Consumer实例" class="headerlink" title="Consumer实例"></a>Consumer实例</h3><p>运行命令<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker run --net=docker_default --rm -it ryane/kafkacat -C -b kafka1:9092,kafka2:9092,kafka3:9092 -t <span class="built_in">test</span> -o -10  -f <span class="string">'Topic:%t partion:%p offset:%o key:%k value:%s\n'</span></span><br><span class="line">Topic:<span class="built_in">test</span> partion:0 offset:91 key:<span class="comment">#9bf279 value:Ba50fEc5-f7CB-f56b-1FA5-0Ee6c79FA51C</span></span><br><span class="line">Topic:<span class="built_in">test</span> partion:0 offset:92 key:<span class="comment">#ebf279 value:cf9FB33f-ca2F-B7f9-0D79-EC0bFF5d5c79</span></span><br><span class="line">Topic:<span class="built_in">test</span> partion:0 offset:93 key:<span class="comment">#f28479 value:e24f4823-ccd9-Ad46-2AC0-303FB7cbbC6B</span></span><br><span class="line">Topic:<span class="built_in">test</span> partion:0 offset:94 key:<span class="comment">#f279f2 value:6bBDC57b-DEA2-cdfF-b78a-35a6189F9Ffd</span></span><br><span class="line">Topic:<span class="built_in">test</span> partion:0 offset:95 key:<span class="comment">#7994f2 value:7aBdfDfF-583A-9CBF-EF62-CEFBddee3982</span></span><br><span class="line">Topic:<span class="built_in">test</span> partion:0 offset:96 key:<span class="comment">#79cef2 value:FF9dbEDF-9BC2-Fe9f-A08C-40eFdF578e7D</span></span><br><span class="line">Topic:<span class="built_in">test</span> partion:0 offset:97 key:<span class="comment">#7987f2 value:8dAbbaBC-F5f6-cc67-1Fb3-536D21ec5E74</span></span><br><span class="line">Topic:<span class="built_in">test</span> partion:0 offset:98 key:<span class="comment">#e279f2 value:37c71A49-ec38-BC0c-7cFF-B4EE8d5ceCFC</span></span><br><span class="line">Topic:<span class="built_in">test</span> partion:0 offset:99 key:<span class="comment">#f2c679 value:aD23b7FA-003a-B5E4-78C4-FAC2bb1Ecb2E</span></span><br><span class="line">Topic:<span class="built_in">test</span> partion:0 offset:100 key:<span class="comment">#8b79f2 value:4Ff1dAF2-9b7c-FCe7-d66c-CC49972C0cd0</span></span><br><span class="line">% Reached end of topic <span class="built_in">test</span> [0] at offset 101</span><br></pre></td></tr></table></figure></p>
+<p>从test topic中获取最后10个消息并且打印信息</p>
+<p>开启新窗口多次执行producer命令,consumer会持续的打印输出。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>至此我们已经使用搭建了一个基本的kafka集群系统,以后会增加一下集群运维和应用场景的分享。</p>
+]]></content>
       <categories>
         <category>技术</category>
       </categories>
@@ -55,9 +660,36 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[使用docker创建zookeeper集群]]></title>
-    <url>%2F2017%2F03%2F01%2Fdocker-zookeeper-cluster%2F</url>
-    <content type="text"><![CDATA[使用docker创建一个包含三个节点的zookeeper集群,并提供web管理界面。 过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。 原料 Docker version 1.13.0 docker-compose version 1.10.0 fify/node-zk-browser:latest 镜像 zookeeper:latest 镜像 步骤编辑zookeeper.yml配置文件123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172version: '2'networks: zookeeper_network: driver: bridgeservices: zoo1: image: zookeeper:latest container_name: zoo1 ports: - "21811:2181" expose: - "2888" - "3888" networks: - "zookeeper_network" volumes: - "./storge/zoo1/data:/data:rw" - "./storge/zoo1/datalog:/datalog:rw" - "./storge/zoo1/conf:/conf:rw" environment: ZOO_MY_ID: 1 ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888 zoo2: image: zookeeper:latest container_name: zoo2 ports: - "21812:2181" networks: - "zookeeper_network" expose: - "2888" - "3888" volumes: - "./storge/zoo2/data:/data:rw" - "./storge/zoo2/datalog:/datalog:rw" - "./storge/zoo2/conf:/conf:rw" environment: ZOO_MY_ID: 2 ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888 zoo3: image: zookeeper:latest container_name: zoo3 ports: - "21813:2181" networks: - "zookeeper_network" expose: - "2888" - "3888" volumes: - "./storge/zoo3/data:/data:rw" - "./storge/zoo3/datalog:/datalog:rw" - "./storge/zoo3/conf:/conf:rw" environment: ZOO_MY_ID: 3 ZOO_SERVERS: server.1=zoo1:2888:3888 server.2=zoo2:2888:3888 server.3=zoo3:2888:3888 zk-manager: image: fify/node-zk-browser:latest container_name: zk-manager restart: always depends_on: - zoo1 - zoo2 - zoo3 ports: - "3000:3000" networks: - "zookeeper_network" expose: - "3000" environment: ZK_HOST: zoo1:2181,zoo2:2181,zoo3:2181 运行服务123456789101112➜ docker docker-compose -f zookeeper.yml up --remove -dStarting zoo3Starting zoo2Starting zoo1Starting zk-manager➜ docker docker-compose -f zookeeper.yml ps Name Command State Ports-------------------------------------------------------------------------------------------------zk-manager /opt/node-zk-browser/start.sh Up 0.0.0.0:3000-&gt;3000/tcpzoo1 /docker-entrypoint.sh zkSe ... Up 0.0.0.0:21811-&gt;2181/tcp, 2888/tcp, 3888/tcpzoo2 /docker-entrypoint.sh zkSe ... Up 0.0.0.0:21812-&gt;2181/tcp, 2888/tcp, 3888/tcpzoo3 /docker-entrypoint.sh zkSe ... Up 0.0.0.0:21813-&gt;2181/tcp, 2888/tcp, 3888/tcp 使用方式通过zkCli访问: 123456789➜ docker zkCli -server 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813Connecting to 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813Welcome to ZooKeeper!JLine support is enabledWATCHER::WatchedEvent state:SyncConnected type:None path:null[zk: 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813(CONNECTED) 0] node-zk-browser web界面 地址：http://127.0.0.1:3000 说明 集群包含三个zookeeper节点:zoo1,zoo2,zoo3,分别监听本地21811,21812,21813三个端口,docker端口为2181 各个zookeeper节点数据存储在本地./storge/zoo1,zoo2,zoo3。 zookeeper节点通过docker端口2888,3888进行通讯,2888为选举端口,3888为备选端口 node-zk-browser通过docker端口2181访问各个zookeeper节点,本地监听3000端口 遗留问题 node-zk-browser界面丑出天际有没有(ノ ﾟДﾟ)ノ ＝＝＝＝ ┻━━┻?谁有更好的选择推荐一下。 目前无法使用docker-compose scale动态扩展zookeeper节点,因为ZOO_MY_ID和ZOO_SERVERS选项需要在配置文件中制定,但这一方面并不是很重要,一般情况下并不需要扩展节点。]]></content>
+    <title>使用docker创建zookeeper集群</title>
+    <url>/2017/03/01/docker-zookeeper-cluster/</url>
+    <content><![CDATA[<p>使用docker创建一个包含三个节点的zookeeper集群,并提供web管理界面。</p>
+<blockquote>
+<p>过去几年接触过的分布式系统大多使用zookeeper作为分布式程序协调服务。去年做solrCloud就有用到,当时是使用单机模式与伪分布式模式,。最近研究kafka也要用到zookeerper,于是在本地使用docker与docker-compose搭建了一个分布式zookeerper集群,附带一个node-zk-browser管理器,以后本地测试与验证终于可以在集群环境下进行了。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="原料"><a href="#原料" class="headerlink" title="原料"></a>原料</h2><ul>
+<li>Docker version 1.13.0</li>
+<li>docker-compose version 1.10.0</li>
+<li>fify/node-zk-browser:latest 镜像</li>
+<li>zookeeper:latest 镜像</li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="编辑zookeeper-yml配置文件"><a href="#编辑zookeeper-yml配置文件" class="headerlink" title="编辑zookeeper.yml配置文件"></a>编辑zookeeper.yml配置文件</h3><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'2'</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">zookeeper_network:</span></span><br><span class="line">      <span class="attr">driver:</span> <span class="string">bridge</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">zoo1:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">zookeeper:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">zoo1</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"21811:2181"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"2888"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"3888"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"zookeeper_network"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo1/data:/data:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo1/datalog:/datalog:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo1/conf:/conf:rw"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">ZOO_MY_ID:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">ZOO_SERVERS:</span> <span class="string">server.1=zoo1:2888:3888</span> <span class="string">server.2=zoo2:2888:3888</span> <span class="string">server.3=zoo3:2888:3888</span></span><br><span class="line">  <span class="attr">zoo2:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">zookeeper:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">zoo2</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"21812:2181"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"zookeeper_network"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"2888"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"3888"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo2/data:/data:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo2/datalog:/datalog:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo2/conf:/conf:rw"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">ZOO_MY_ID:</span> <span class="number">2</span></span><br><span class="line">      <span class="attr">ZOO_SERVERS:</span> <span class="string">server.1=zoo1:2888:3888</span> <span class="string">server.2=zoo2:2888:3888</span> <span class="string">server.3=zoo3:2888:3888</span></span><br><span class="line">  <span class="attr">zoo3:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">zookeeper:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">zoo3</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"21813:2181"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"zookeeper_network"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"2888"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"3888"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo3/data:/data:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo3/datalog:/datalog:rw"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"./storge/zoo3/conf:/conf:rw"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">ZOO_MY_ID:</span> <span class="number">3</span></span><br><span class="line">      <span class="attr">ZOO_SERVERS:</span> <span class="string">server.1=zoo1:2888:3888</span> <span class="string">server.2=zoo2:2888:3888</span> <span class="string">server.3=zoo3:2888:3888</span></span><br><span class="line">  <span class="attr">zk-manager:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">fify/node-zk-browser:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">zk-manager</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">zoo1</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">zoo2</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">zoo3</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"3000:3000"</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"zookeeper_network"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"3000"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">ZK_HOST:</span> <span class="string">zoo1:2181,zoo2:2181,zoo3:2181</span></span><br></pre></td></tr></table></figure>
+<h3 id="运行服务"><a href="#运行服务" class="headerlink" title="运行服务"></a>运行服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">➜  docker docker-compose -f zookeeper.yml up --remove -d</span><br><span class="line">Starting zoo3</span><br><span class="line">Starting zoo2</span><br><span class="line">Starting zoo1</span><br><span class="line">Starting zk-manager</span><br><span class="line">➜  docker docker-compose  -f zookeeper.yml ps</span><br><span class="line">   Name                 Command               State                      Ports</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">zk-manager   /opt/node-zk-browser/start.sh    Up      0.0.0.0:3000-&gt;3000/tcp</span><br><span class="line">zoo1         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21811-&gt;2181/tcp, 2888/tcp, 3888/tcp</span><br><span class="line">zoo2         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21812-&gt;2181/tcp, 2888/tcp, 3888/tcp</span><br><span class="line">zoo3         /docker-entrypoint.sh zkSe ...   Up      0.0.0.0:21813-&gt;2181/tcp, 2888/tcp, 3888/tcp</span><br></pre></td></tr></table></figure>
+<h3 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h3><p>通过zkCli访问:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">➜  docker zkCli -server 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</span><br><span class="line">Connecting to 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813</span><br><span class="line">Welcome to ZooKeeper!</span><br><span class="line">JLine support is enabled</span><br><span class="line"></span><br><span class="line">WATCHER::</span><br><span class="line"></span><br><span class="line">WatchedEvent state:SyncConnected <span class="built_in">type</span>:None path:null</span><br><span class="line">[zk: 127.0.0.1:21811,127.0.0.1:21812,127.0.0.1:21813(CONNECTED) 0]</span><br></pre></td></tr></table></figure>
+<p>node-zk-browser web界面 地址：<a href="http://127.0.0.1:3000" target="_blank" rel="noopener">http://127.0.0.1:3000</a></p>
+<p><img src="/2017/03/01/docker-zookeeper-cluster/node-zk-web.png" alt="noke-zk-browser"></p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><ul>
+<li>集群包含三个zookeeper节点:zoo1,zoo2,zoo3,分别监听本地21811,21812,21813三个端口,docker端口为2181</li>
+<li>各个zookeeper节点数据存储在本地./storge/zoo1,zoo2,zoo3。</li>
+<li>zookeeper节点通过docker端口2888,3888进行通讯,2888为选举端口,3888为备选端口</li>
+<li>node-zk-browser通过docker端口2181访问各个zookeeper节点,本地监听3000端口</li>
+</ul>
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><ul>
+<li>node-zk-browser界面丑出天际有没有(ノ ﾟДﾟ)ノ　＝＝＝＝　┻━━┻?<br>谁有更好的选择推荐一下。</li>
+<li>目前无法使用docker-compose scale动态扩展zookeeper节点,因为ZOO_MY_ID和ZOO_SERVERS选项需要在配置文件中制定,但这一方面并不是很重要,一般情况下并不需要扩展节点。</li>
+</ul>
+]]></content>
       <categories>
         <category>技术</category>
       </categories>
